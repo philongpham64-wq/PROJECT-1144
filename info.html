@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thong tin</title>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Grenze:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            display: grid;
+            min-height: 100vh;
+            margin: 0;
+            place-items: center;
+            padding: 24px;
+            font-family: 'Grenze', Georgia, serif;
+            background:
+                radial-gradient(circle at 90% 12%, rgba(255, 112, 67, 0.32), transparent 28%),
+                linear-gradient(135deg, #e6f4fb, #d9f2f2 55%, #fff3e0);
+            color: #1f2937;
+        }
+
+        .info-card {
+            position: relative;
+            width: min(100%, 620px);
+            padding: 32px;
+            border: 2px solid #0e7490;
+            border-top: 8px solid #c62828;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.94);
+            box-shadow: 0 16px 36px rgba(7, 89, 133, 0.2);
+            text-align: center;
+        }
+
+        .info-card::before {
+            position: absolute;
+            top: 18px;
+            left: 22px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #f57c00;
+            box-shadow: 20px 0 #075985, 40px 0 #c62828;
+            content: '';
+        }
+
+        h1 {
+            margin-top: 0;
+            font-family: 'Anton', Impact, sans-serif;
+            color: #c62828;
+            text-shadow: 2px 2px 0 rgba(255, 183, 77, 0.45);
+        }
+
+        p {
+            line-height: 1.6;
+            color: #31536b;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 16px;
+            padding: 10px 18px;
+            border-radius: 6px;
+            background: linear-gradient(100deg, #c62828, #f57c00);
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            background: linear-gradient(100deg, #8e1b1b, #d85f00);
+        }
+    </style>
+</head>
+<body>
+    <main class="info-card">
+        <h1 id="info-title">Thong tin</h1>
+        <p id="info-content">Dang tai thong tin...</p>
+        <a class="back-link" href="blank.html">Quay lai cac o</a>
+    </main>
+
+    <script>
+        const boxNumber = new URLSearchParams(window.location.search).get('box') || '1';
+        const boxData = {
+            1: 'Day la noi dung chi tiet cua o 01.',
+            2: 'Day la noi dung chi tiet cua o 02.',
+            3: 'Day la noi dung chi tiet cua o 03.',
+            4: 'Day la noi dung chi tiet cua o 04.',
+            5: 'Day la noi dung chi tiet cua o 05.',
+            6: 'Day la noi dung chi tiet cua o 06.',
+            7: 'Day la noi dung chi tiet cua o 07.',
+            8: 'Day la noi dung chi tiet cua o 08.',
+            9: 'Day la noi dung chi tiet cua o 09.'
+        };
+
+        document.getElementById('info-title').textContent = `Thong tin o ${String(boxNumber).padStart(2, '0')}`;
+        document.getElementById('info-content').textContent = boxData[boxNumber] || 'Chua co thong tin cho o nay.';
+        document.title = `Thong tin o ${String(boxNumber).padStart(2, '0')}`;
+    </script>
+</body>
+</html>

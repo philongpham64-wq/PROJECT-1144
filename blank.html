@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cac o nho</title>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Grenze:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            padding: 32px 20px;
+            font-family: 'Grenze', Georgia, serif;
+            background:
+                radial-gradient(circle at 8% 10%, rgba(255, 183, 77, 0.42), transparent 28%),
+                linear-gradient(135deg, #e6f4fb, #d9f2f2 55%, #fff3e0);
+            color: #1f2937;
+        }
+
+        h1 {
+            margin: 0 auto 28px;
+            font-family: 'Anton', Impact, sans-serif;
+            text-align: center;
+            color: #c62828;
+            font-size: clamp(2rem, 5vw, 3rem);
+            text-shadow: 2px 2px 0 rgba(255, 183, 77, 0.45);
+        }
+
+        h1::after {
+            display: block;
+            width: 64px;
+            height: 5px;
+            margin: 12px auto 0;
+            border-radius: 5px;
+            background: #f57c00;
+            content: '';
+        }
+
+        .box-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 16px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .small-box {
+            display: block;
+            min-height: 120px;
+            padding: 18px;
+            border: 2px solid #0e7490;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.9);
+            color: inherit;
+            box-shadow: 0 8px 18px rgba(7, 89, 133, 0.12);
+            text-align: center;
+            text-decoration: none;
+            transition: transform 160ms ease, box-shadow 160ms ease;
+        }
+
+        .small-box:hover {
+            transform: translateY(-3px);
+            border-color: #c62828;
+            box-shadow: 0 12px 24px rgba(198, 40, 40, 0.2);
+        }
+
+        .small-box:nth-child(3n + 1) {
+            border-top: 6px solid #c62828;
+        }
+
+        .small-box:nth-child(3n + 2) {
+            border-top: 6px solid #f57c00;
+        }
+
+        .small-box:nth-child(3n) {
+            border-top: 6px solid #075985;
+        }
+
+        .small-box h2 {
+            margin: 0 0 10px;
+            font-family: 'Anton', Impact, sans-serif;
+            font-size: 1.1rem;
+            color: #c62828;
+        }
+
+        .small-box p {
+            margin: 0;
+            color: #4b5563;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 600px) {
+            .box-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Cac o nho</h1>
+
+    <main class="box-grid">
+        <a class="small-box" href="info.html?box=1" target="_blank" rel="noopener">
+            <h2>O 01</h2>
+            <p>Noi dung o 01</p>
+        </a>
+        <a class="small-box" href="info.html?box=2" target="_blank" rel="noopener">
+            <h2>O 02</h2>
+            <p>Noi dung o 02</p>
+        </a>
+        <a class="small-box" href="info.html?box=3" target="_blank" rel="noopener">
+            <h2>O 03</h2>
+            <p>Noi dung o 03</p>
+        </a>
+        <a class="small-box" href="info.html?box=4" target="_blank" rel="noopener">
+            <h2>O 04</h2>
+            <p>Noi dung o 04</p>
+        </a>
+        <a class="small-box" href="info.html?box=5" target="_blank" rel="noopener">
+            <h2>O 05</h2>
+            <p>Noi dung o 05</p>
+        </a>
+        <a class="small-box" href="info.html?box=6" target="_blank" rel="noopener">
+            <h2>O 06</h2>
+            <p>Noi dung o 06</p>
+        </a>
+        <a class="small-box" href="info.html?box=7" target="_blank" rel="noopener">
+            <h2>O 07</h2>
+            <p>Noi dung o 07</p>
+        </a>
+        <a class="small-box" href="info.html?box=8" target="_blank" rel="noopener">
+            <h2>O 08</h2>
+            <p>Noi dung o 08</p>
+        </a>
+        <a class="small-box" href="info.html?box=9" target="_blank" rel="noopener">
+            <h2>O 09</h2>
+            <p>Noi dung o 09</p>
+        </a>
+    </main>
+</body>
+</html>

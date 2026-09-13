@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PROJECT 1144 | Khám phá thành phố</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+</head>
+<body class="page">
+<!--start navbar-->
+<nav class="navbar navbar-expand-lg bg-danger shadow-sm site-navbar">
+    <div class="container-fluid">
+        <a class="navbar-brand d-flex align-items-center" href="#">
+            <img src="img.png" alt="TP.HCM logo" width="50" height="50" class="d-inline-block me-2">
+            <span>TP.HCM</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#top">Giới thiệu</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="#latest-news">Tin mới nhất</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="#more-news">Video</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="#site-footer">Liên lạc</a>
+                </li>
+            </ul>
+            <div class="d-flex flex-column flex-lg-row gap-2 mt-3 mt-lg-0" role="group" aria-label="Tài khoản">
+                <button class="btn btn-danger navbar-account-btn me-2" data-bs-toggle="modal" data-bs-target="#form-login">ĐĂNG NHẬP</button>
+                <button class="btn navbar-account-btn navbar-register-btn" data-bs-toggle="modal" data-bs-target="#form-register">ĐĂNG KÝ</button>
+            </div>
+        </div>
+    </div>
+</nav>
+<!--end navbar-->
+
+<header id="top" class="site-hero container-fluid">
+  <div class="site-hero-content">
+    <span class="site-hero-kicker">KHÁM PHÁ SÀI GÒN</span>
+    <h1>Điểm đến nổi bật của TP.HCM</h1>
+    <p>Từ di tích lịch sử, kiến trúc cổ kính đến cảnh quan hiện đại, mỗi địa danh đều mang một câu chuyện riêng của thành phố.</p>
+    <div class="site-hero-actions">
+      <a href="#latest-news" class="btn btn-danger btn-lg fw-bold">Khám phá ngay</a>
+      <a href="#site-footer" class="btn btn-outline-light btn-lg fw-bold">Liên hệ</a>
+    </div>
+    <div class="site-hero-tags" aria-label="Chủ đề nổi bật">
+      <span>Di tích</span>
+      <span>Ẩm thực</span>
+      <span>Check-in</span>
+    </div>
+  </div>
+</header>
+
+<section class="featured-panel container-fluid" aria-label="Điểm nhấn du lịch">
+  <div class="featured-panel-inner">
+    <div class="featured-copy">
+      <span class="featured-kicker">TP.HCM GUIDE</span>
+      <h2>Những điểm đến nổi bật của thành phố</h2>
+      <p>Khám phá không gian lịch sử, văn hóa và cảnh quan sống động của Thành phố Hồ Chí Minh qua những địa danh đáng ghé thăm nhất.</p>
+      <div class="featured-pills">
+        <span>Di tích</span>
+        <span>Ẩm thực</span>
+        <span>Chụp ảnh</span>
+      </div>
+    </div>
+    <div class="featured-list">
+      <article class="mini-story">
+        <span class="mini-badge">Hot</span>
+        <h3>Dinh Độc Lập</h3>
+        <p>Địa chỉ: 135 Nam Kỳ Khởi Nghĩa, Quận 1. Nơi lưu giữ ký ức lịch sử và kiến trúc mang dấu ấn của Sài Gòn xưa.</p>
+      </article>
+      <article class="mini-story accent">
+        <span class="mini-badge">Nổi bật</span>
+        <h3>Chợ Bến Thành</h3>
+        <p>Địa chỉ: Q.1. Giao thoa giữa mua sắm, ẩm thực và văn hóa địa phương, phù hợp cho khách du lịch cả ngày lẫn tối.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="editorial-section container-fluid" aria-label="Điểm đến nổi bật">
+  <div class="editorial-layout">
+    <article class="editorial-featured">
+      <div class="editorial-image-wrap">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLUJvUmHhYTUTVqk-xijLDk8Mhh5g0o7w_dpHP8AOufw&s=10" alt="Mặt tiền ngoài Dinh Độc Lập">
+      </div>
+      <div class="editorial-content">
+        <span class="section-badge">Chuyên đề</span>
+        <h3>Khám phá những địa điểm du lịch đẹp nhất của TP.HCM</h3>
+        <p>Với sự kết hợp giữa di tích lịch sử, phố cổ, sông nước và các công trình hiện đại, TP.HCM là nơi du khách có thể trải nghiệm nhiều phong cách trong chỉ một ngày.</p>
+        <a href="blank.html" target="_blank" rel="noopener" class="text-link">Xem chi tiết</a>
+      </div>
+    </article>
+
+    <aside class="editorial-sidebar">
+      <div class="sidebar-box">
+        <h3>Đọc nhiều nhất</h3>
+        <ol class="trend-list">
+          <li><span>01</span><a href="blank.html" target="_blank" rel="noopener">Nhà thờ Đức Bà - điểm check-in đẹp giữa trung tâm</a></li>
+          <li><span>02</span><a href="blank.html" target="_blank" rel="noopener">Bến Bạch Đằng - trải nghiệm cảnh sông Sài Gòn về đêm</a></li>
+          <li><span>03</span><a href="blank.html" target="_blank" rel="noopener">Landmark 81 - góc nhìn đẹp nhất thành phố</a></li>
+        </ol>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<section class="ticker-bar container-fluid" aria-label="Tin du lịch nóng">
+  <div class="ticker-inner">
+    <span class="ticker-label">DU LỊCH NÓNG</span>
+    <div class="ticker-track" aria-label="Tin du lịch đang diễn ra">
+      <div class="ticker-track-inner">
+        <span>Di tích lịch sử hút khách quốc tế.</span>
+        <span>Chợ Bến Thành, Nhà thờ Đức Bà và Dinh Độc Lập.</span>
+        <span>Vẻ đẹp đêm Sài Gòn đang hot.</span>
+        <span>Di tích lịch sử hút khách quốc tế.</span>
+        <span>Chợ Bến Thành, Nhà thờ Đức Bà và Dinh Độc Lập.</span>
+        <span>Vẻ đẹp đêm Sài Gòn đang hot.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="category-section container-fluid" aria-label="Chuyên mục du lịch">
+  <div class="category-header">
+    <h2>Chuyên mục</h2>
+    <a href="#latest-news">Xem tất cả</a>
+  </div>
+  <div class="category-grid">
+    <article class="category-card">
+      <span class="category-icon">🏛️</span>
+      <h3>Lịch sử</h3>
+      <p>Khám phá các di tích mang dấu ấn thời kỳ Sài Gòn xưa như Dinh Độc Lập và Nhà thờ Đức Bà.</p>
+    </article>
+    <article class="category-card">
+      <span class="category-icon">🍜</span>
+      <h3>Ẩm thực</h3>
+      <p>Trải nghiệm món ngon đường phố, quán ăn truyền thống và các món đặc sản nổi tiếng của thành phố.</p>
+    </article>
+    <article class="category-card">
+      <span class="category-icon">🌆</span>
+      <h3>Skyline</h3>
+      <p>Địa điểm ngắm thành phố từ trên cao, đặc biệt đẹp vào buổi chiều tối và khi đêm xuống.</p>
+    </article>
+    <article class="category-card">
+      <span class="category-icon">📸</span>
+      <h3>Check-in</h3>
+      <p>Những góc chụp ảnh đẹp, nổi bật với phong cảnh đường phố, sông nước và kiến trúc kết hợp hiện đại.</p>
+    </article>
+    <article class="category-card">
+      <span class="category-icon">🚤</span>
+      <h3>Sông nước</h3>
+      <p>Tham gia du thuyền, ngắm thành phố từ trên mặt nước và trải nghiệm không khí dịu mát ven sông.</p>
+    </article>
+    <article class="category-card">
+      <span class="category-icon">🌿</span>
+      <h3>Thiên nhiên</h3>
+      <p>Khám phá các công viên, khu rừng và điểm nghỉ dưỡng giúp bạn thư giãn giữa lòng thành phố.</p>
+    </article>
+  </div>
+</section>
+
+<section class="video-section container-fluid" aria-label="Video du lịch">
+  <div class="video-header">
+    <h2>Video du lịch</h2>
+    <a href="#site-footer">Xem thêm</a>
+  </div>
+  <div class="video-grid">
+    <article class="video-card large-video">
+      <div class="video-thumb thumb-one">
+        <button class="play-button" aria-label="Phát video">▶</button>
+      </div>
+      <div class="video-copy">
+        <span>Phóng sự</span>
+        <h3>Hành trình khám phá các điểm du lịch đẹp ở TP.HCM</h3>
+      </div>
+    </article>
+    <article class="video-card">
+      <div class="video-thumb thumb-two">
+        <button class="play-button" aria-label="Phát video">▶</button>
+      </div>
+      <div class="video-copy">
+        <span>Góc nhìn</span>
+        <h3>Đêm Sài Gòn với ánh đèn, sông nước và phố cổ</h3>
+      </div>
+    </article>
+    <article class="video-card">
+      <div class="video-thumb thumb-three">
+        <button class="play-button" aria-label="Phát video">▶</button>
+      </div>
+      <div class="video-copy">
+        <span>Khám phá</span>
+        <h3>Du lịch văn hóa tại các địa điểm lịch sử nổi bật</h3>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="analysis-section container-fluid" aria-label="Khám phá du lịch">
+  <div class="analysis-header">
+    <h2>Khám phá TP.HCM</h2>
+  </div>
+  <div class="analysis-grid">
+    <article class="analysis-card">
+      <span class="analysis-tag">Điểm đến</span>
+      <h3>Nhà thờ Đức Bà mang vẻ đẹp kiến trúc và góc chụp ảnh đẹp giữa lòng thành phố</h3>
+      <p>Đây là một trong những địa điểm du lịch nổi tiếng với phong cách kiến trúc cổ điển và không gian yên bình ở trung tâm.</p>
+      <a href="blank.html" target="_blank" rel="noopener">Đọc tiếp</a>
+    </article>
+    <article class="analysis-card">
+      <span class="analysis-tag">Hành trình</span>
+      <h3>Đường phố Sài Gòn về đêm với ánh đèn, ẩm thực và cảm giác sống động</h3>
+      <p>Khám phá những con đường đẹp, quán ăn nổi tiếng và góc nhìn ngắm thành phố từ nhiều chiều khác nhau.</p>
+      <a href="blank.html" target="_blank" rel="noopener">Đọc tiếp</a>
+    </article>
+    <article class="analysis-card">
+      <span class="analysis-tag">Lịch sử</span>
+      <h3>Dinh Độc Lập là nơi lưu giữ ký ức quan trọng của Sài Gòn xưa</h3>
+      <p>Địa danh này thu hút du khách nhờ giá trị lịch sử, kiến trúc độc đáo và không gian văn hóa đặc trưng.</p>
+      <a href="blank.html" target="_blank" rel="noopener">Đọc tiếp</a>
+    </article>
+  </div>
+</section>
+
+<!-- Modal -->
+    <div class="modal fade" id="form-login" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <a class="navbar-brand d-flex align-items-center" href="#">
+                        <img src="src/images.png" alt="logo" width="150" height="100" class="d-inline-block align-text-top me-2">
+                        <div>BAOMOI</div>
+                    </a>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="login-form">
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label fs-4">Email</label>
+                            <input placeholder="nhập_email" type="email" class="form-control fs-5 p-3" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputPassword1" class="form-label fs-4">Mật khẩu</label>
+                            <input placeholder="nhập_mật_khẩu" type="password" class="form-control fs-5 p-3" id="exampleInputPassword1">
+                        </div>
+                        <div class="mb-3 form-check fs-4">
+                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                            <label class="form-check-label" for="exampleCheck1">Hiện mật khẩu</label>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger fs-4 fw-bold w-100">ĐĂNG NHẬP</button>
+                </div>
+            </div>
+        </div>
+    </div>
+<!--End Form login-->
+
+  <!-- Modal register -->
+    <div class="modal fade" id="form-register" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <div>
+              <span class="modal-kicker">THAM GIA CỘNG ĐỒNG</span>
+              <h2 class="modal-title" id="registerModalLabel">Tạo tài khoản</h2>
+            </div>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Đóng"></button>
+          </div>
+          <form id="register-form">
+            <div class="modal-body">
+              <label class="form-label" for="register-name">Tên hiển thị</label>
+              <input class="form-control mb-3" id="register-name" type="text" placeholder="Nhập tên của bạn" required>
+              <label class="form-label" for="register-email">Email</label>
+              <input class="form-control mb-3" id="register-email" type="email" placeholder="email@example.com" required>
+              <label class="form-label" for="register-password">Mật khẩu</label>
+              <input class="form-control" id="register-password" type="password" placeholder="Tối thiểu 6 ký tự" minlength="6" required>
+              <p class="form-note">Đăng ký để nhận bản tin chọn lọc mỗi sáng.</p>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-danger fw-bold w-100">TẠO TÀI KHOẢN</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  <!-- End Modal register -->
+
+  <section class="quick-stats container-fluid" aria-label="Tổng quan du lịch">
+    <div class="quick-stat"><strong>15+</strong><span>Điểm đến nổi bật</span></div>
+    <div class="quick-stat"><strong>4.8/5</strong><span>Đánh giá du khách</span></div>
+    <div class="quick-stat"><strong>1 ngày</strong><span>Khám phá trọn vẹn</span></div>
+  </section>
+
+<!--start tin tức mới nhất-->
+    <section id="latest-news" class="latest-news container-fluid mt-4" aria-labelledby="latest-news-title">
+      <h2 id="latest-news-title" class="latest-news-title">Danh lam thắng cảnh TP.HCM</h2>
+      <div class="row">
+        <!--cột bên trái-->
+        <div class="col-md-4 mb-4">
+          <article class="card latest-news-card h-100">
+            <img class="card-img-top latest-news-image" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLUJvUmHhYTUTVqk-xijLDk8Mhh5g0o7w_dpHP8AOufw&s=10" alt="Mặt tiền ngoài Dinh Độc Lập">
+            <div class="card-body">
+              <div class="article-meta"><span>Di tích lịch sử</span><time datetime="2026-09-12">12/09/2026</time></div>
+              <h5 class="card-title">Dinh Độc Lập</h5>
+              <p class="card-text">Địa chỉ: 135 Nam Kỳ Khởi Nghĩa, Quận 1. Đây là biểu tượng lịch sử của TP.HCM, nổi tiếng với kiến trúc cổ kính và không gian mang đậm dấu ấn Sài Gòn xưa.</p>
+              <a href="blank.html" target="_blank" rel="noopener" class="btn btn-danger btn-lg fw-bold">Xem chi tiết</a>
+            </div>
+          </article>
+        </div>
+        <!--cột ở giữa-->
+        <div class="col-md-4 mb-4">
+          <article class="card latest-news-card h-100">
+            <img class="card-img-top latest-news-image" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJeqppzMnO7lagVdmZMGbevAzPY9wPKYWLJEalOnKBeA&s=10" alt="Chợ Bến Thành">
+            <div class="card-body">
+              <div class="article-meta"><span>Ẩm thực & mua sắm</span><time datetime="2026-09-12">12/09/2026</time></div>
+              <h5 class="card-title">Chợ Bến Thành</h5>
+              <p class="card-text">Địa chỉ: Q.1. Chợ nổi tiếng với hàng hóa đa dạng, quà lưu niệm, món ăn đường phố và không khí nhộn nhịp đặc trưng của Sài Gòn.</p>
+              <a href="blank.html" target="_blank" rel="noopener" class="btn btn-danger btn-lg fw-bold">Xem chi tiết</a>
+            </div>
+          </article>
+        </div>
+        <!--cột bên phải-->
+        <div class="col-md-4 mb-4">
+          <article class="card latest-news-card h-100">
+            <img class="card-img-top latest-news-image" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxqQd7Pzr4gTesgaQgSRDFIEMUX6urtxziuzm0stowdg&s=10" alt="Nhà thờ Đức Bà">
+            <div class="card-body">
+              <div class="article-meta"><span>Kiến trúc</span><time datetime="2026-09-12">12/09/2026</time></div>
+              <h5 class="card-title">Nhà thờ Đức Bà</h5>
+              <p class="card-text">Địa chỉ: 1 Công xã Paris, Bến Nghé, Quận 1. Tọa lạc giữa trung tâm thành phố và nổi tiếng với kiến trúc cổ điển và góc chụp ảnh đẹp.</p>
+              <a href="blank.html" target="_blank" rel="noopener" class="btn btn-danger btn-lg fw-bold">Xem chi tiết</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+<!--end tin tức mới nhất--> 
+<!--start tin tức mới nhất-->
+    <section id="more-news" class="latest-news container-fluid mt-4" aria-labelledby="latest-news-title">
+      <div class="row">
+        <!--cột bên trái-->
+        <div class="col-md-4 mb-4">
+          <article class="card latest-news-card h-100">
+            <img class="card-img-top latest-news-image" src="https://images.unsplash.com/photo-1505761671935-60e5b5d5f6a8?auto=format&fit=crop&w=1200&q=80" alt="Bến Bạch Đằng">
+            <div class="card-body">
+              <h5 class="card-title">Bến Bạch Đằng</h5>
+              <p class="card-text">Nằm ven sông Sài Gòn, nơi đây trở thành điểm dừng chân lý tưởng cho du khách muốn thưởng thức không khí đêm, ngắm cầu Ba Son và cảm nhận nhịp sống sôi động của thành phố.</p>
+              <a href="blank.html" target="_blank" rel="noopener" class="btn btn-danger btn-lg fw-bold">Xem chi tiết</a>
+            </div>
+          </article>
+        </div>
+        <!--cột ở giữa-->
+        <div class="col-md-4 mb-4">
+          <article class="card latest-news-card h-100">
+            <img class="card-img-top latest-news-image" src="https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=1200&q=80" alt="Landmark 81">
+            <div class="card-body">
+              <h5 class="card-title">Landmark 81</h5>
+              <p class="card-text">Được biết đến như biểu tượng đô thị hiện đại, Landmark 81 là địa điểm ngắm toàn cảnh TP.HCM từ độ cao, thu hút nhiều du khách muốn trải nghiệm không gian hiện đại và đêm thành phố lung linh.</p>
+              <a href="blank.html" target="_blank" rel="noopener" class="btn btn-danger btn-lg fw-bold">Xem chi tiết</a>
+            </div>
+          </article>
+        </div>
+        <!--cột bên phải-->
+        <div class="col-md-4 mb-4">
+          <article class="card latest-news-card h-100">
+            <img class="card-img-top latest-news-image" src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1200&q=80" alt="Núi Bà Đen">
+            <div class="card-body">
+              <h5 class="card-title">Núi Bà Đen</h5>
+              <p class="card-text">Một điểm đến du lịch nổi bật với không gian núi rừng, tuyến cáp treo, và cảnh quan tuyệt đẹp, phù hợp cho những ai muốn trải nghiệm thiên nhiên trong ngày nghỉ cuối tuần.</p>
+              <a href="blank.html" target="_blank" rel="noopener" class="btn btn-danger btn-lg fw-bold">Xem chi tiết</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+<!--end tin tức mới nhất-->
+
+<section class="latest-news container-fluid mt-4" aria-labelledby="more-destinations-title">
+  <h2 id="more-destinations-title" class="latest-news-title">Các địa danh khác ở TP.HCM</h2>
+  <div class="row">
+    <div class="col-md-4 mb-4">
+      <article class="card latest-news-card h-100">
+        <img class="card-img-top latest-news-image" src="https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=1200&q=80" alt="Vườn hoa Tao Đàn">
+        <div class="card-body">
+          <div class="article-meta"><span>Công viên</span><time datetime="2026-09-13">13/09/2026</time></div>
+          <h5 class="card-title">Công viên Tao Đàn</h5>
+          <p class="card-text">Địa chỉ: Q.1. Nơi lý tưởng để đi dạo, ngắm cây xanh và thưởng thức không khí thoáng mát giữa trung tâm thành phố.</p>
+          <a href="blank.html" target="_blank" rel="noopener" class="btn btn-danger btn-lg fw-bold">Xem chi tiết</a>
+        </div>
+      </article>
+    </div>
+
+    <div class="col-md-4 mb-4">
+      <article class="card latest-news-card h-100">
+        <img class="card-img-top latest-news-image" src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1200&q=80" alt="Bưu điện Thành phố">
+        <div class="card-body">
+          <div class="article-meta"><span>Kiến trúc cổ</span><time datetime="2026-09-13">13/09/2026</time></div>
+          <h5 class="card-title">Bưu điện Thành phố</h5>
+          <p class="card-text">Địa chỉ: Q.1. Công trình mang phong cách cổ điển, nổi tiếng với kiến trúc đẹp và là điểm chụp ảnh yêu thích của người dân và du khách.</p>
+          <a href="blank.html" target="_blank" rel="noopener" class="btn btn-danger btn-lg fw-bold">Xem chi tiết</a>
+        </div>
+      </article>
+    </div>
+
+    <div class="col-md-4 mb-4">
+      <article class="card latest-news-card h-100">
+        <img class="card-img-top latest-news-image" src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80" alt="Chùa Ngọc Hoàng">
+        <div class="card-body">
+          <div class="article-meta"><span>Văn hóa tâm linh</span><time datetime="2026-09-13">13/09/2026</time></div>
+          <h5 class="card-title">Chùa Ngọc Hoàng</h5>
+          <p class="card-text">Địa chỉ: Q.5. Là điểm đến linh thiêng, nổi bật với kiến trúc đẹp và không gian yên tĩnh, thích hợp cho những ai muốn tìm sự bình yên.</p>
+          <a href="blank.html" target="_blank" rel="noopener" class="btn btn-danger btn-lg fw-bold">Xem chi tiết</a>
+        </div>
+      </article>
+    </div>
+
+    <div class="col-md-4 mb-4">
+      <article class="card latest-news-card h-100">
+        <img class="card-img-top latest-news-image" src="https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=1200&q=80" alt="Khu du lịch Suối Tiên">
+        <div class="card-body">
+          <div class="article-meta"><span>Giải trí</span><time datetime="2026-09-13">13/09/2026</time></div>
+          <h5 class="card-title">Khu du lịch Suối Tiên</h5>
+          <p class="card-text">Địa chỉ: Q.9. Một trong những địa điểm vui chơi, nghỉ dưỡng và du lịch sinh thái phổ biến với không gian xanh và hoạt động giải trí đa dạng.</p>
+          <a href="blank.html" target="_blank" rel="noopener" class="btn btn-danger btn-lg fw-bold">Xem chi tiết</a>
+        </div>
+      </article>
+    </div>
+
+    <div class="col-md-4 mb-4">
+      <article class="card latest-news-card h-100">
+        <img class="card-img-top latest-news-image" src="https://images.unsplash.com/photo-1505761671935-60e5b5d5f6a8?auto=format&fit=crop&w=1200&q=80" alt="Bến Nhà Rồng">
+        <div class="card-body">
+          <div class="article-meta"><span>Di tích</span><time datetime="2026-09-13">13/09/2026</time></div>
+          <h5 class="card-title">Bến Nhà Rồng</h5>
+          <p class="card-text">Địa chỉ: Q.4. Nơi gắn liền với lịch sử xưa của thành phố, mang cảm giác hoài niệm và là điểm đến yêu thích của người yêu du lịch.</p>
+          <a href="blank.html" target="_blank" rel="noopener" class="btn btn-danger btn-lg fw-bold">Xem chi tiết</a>
+        </div>
+      </article>
+    </div>
+
+    <div class="col-md-4 mb-4">
+      <article class="card latest-news-card h-100">
+        <img class="card-img-top latest-news-image" src="https://images.unsplash.com/photo-1521295121783-8a321d551ad2?auto=format&fit=crop&w=1200&q=80" alt="Vườn hoa Hàng Bàng">
+        <div class="card-body">
+          <div class="article-meta"><span>Điểm chụp ảnh</span><time datetime="2026-09-13">13/09/2026</time></div>
+          <h5 class="card-title">Vườn hoa Hàng Bàng</h5>
+          <p class="card-text">Địa chỉ: Q.5. Không gian xanh, thơ mộng và phù hợp cho những buổi đi dạo, chụp ảnh và thư giãn giữa nhịp sống thành phố.</p>
+          <a href="blank.html" target="_blank" rel="noopener" class="btn btn-danger btn-lg fw-bold">Xem chi tiết</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+<footer id="site-footer" class="site-footer">
+  <p>© THCS NTP 2026-2027, PROJECT 1144</p>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  const passwordInput = document.getElementById('exampleInputPassword1');
+  const passwordToggle = document.getElementById('exampleCheck1');
+  const registerForm = document.getElementById('register-form');
+
+  passwordToggle.addEventListener('change', () => {
+    passwordInput.type = passwordToggle.checked ? 'text' : 'password';
+  });
+
+  registerForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const registerModal = bootstrap.Modal.getInstance(document.getElementById('form-register'));
+    registerModal.hide();
+    window.alert('Đăng ký thành công! Chào mừng bạn đến với NTP News.');
+    registerForm.reset();
+  });
+</script>
+</body>
+</html>
