@@ -1245,3 +1245,88 @@ body:not(.page) {
     }
 }
 
+@media (max-width: 767.98px) {
+    .featured-panel-inner,
+    .editorial-layout,
+    .category-grid,
+    .video-grid,
+    .analysis-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .featured-panel-inner {
+        padding: 20px 16px;
+    }
+
+    .editorial-featured {
+        grid-template-columns: 1fr;
+    }
+
+    .editorial-image-wrap img {
+        height: 230px;
+        min-height: 0;
+    }
+
+    .editorial-content {
+        padding: 22px 20px 24px;
+    }
+
+    .editorial-content h3 {
+        font-size: clamp(1.8rem, 9vw, 2.35rem);
+    }
+
+    .ticker-inner {
+        align-items: stretch;
+        flex-direction: column;
+        gap: 10px;
+        padding: 12px 14px;
+    }
+
+    .ticker-label {
+        align-self: flex-start;
+        min-width: 0;
+    }
+
+    .category-grid,
+    .video-grid,
+    .analysis-grid {
+        gap: 14px;
+    }
+
+    .large-video {
+        grid-row: auto;
+    }
+
+    .large-video .video-thumb {
+        min-height: 230px;
+    }
+}
+
+@media (max-width: 420px) {
+    .site-navbar .container-fluid {
+        padding-right: 12px;
+        padding-left: 12px;
+    }
+
+    .site-navbar .navbar-brand {
+        font-size: 1.1rem;
+    }
+
+    .site-navbar .navbar-brand img {
+        width: 40px;
+        height: 40px;
+    }
+
+    .site-hero-content {
+        padding: 28px 20px 30px;
+    }
+
+    .site-hero h1 {
+        font-size: clamp(2rem, 11vw, 3rem);
+    }
+
+    .sidebar-box {
+        padding: 20px 16px;
+    }
+}
+
