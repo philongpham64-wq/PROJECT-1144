@@ -3,143 +3,156 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cac o nho</title>
-    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Grenze:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>Dinh Độc Lập - Các chủ đề</title>
+
+    <link rel="stylesheet" href="styles.css">
+
     <style>
-        * {
-            box-sizing: border-box;
-        }
-
-        body {
-            margin: 0;
-            min-height: 100vh;
-            padding: 32px 20px;
-            font-family: 'Grenze', Georgia, serif;
-            background:
-                radial-gradient(circle at 8% 10%, rgba(255, 183, 77, 0.42), transparent 28%),
-                linear-gradient(135deg, #e6f4fb, #d9f2f2 55%, #fff3e0);
-            color: #1f2937;
-        }
-
-        h1 {
-            margin: 0 auto 28px;
-            font-family: 'Anton', Impact, sans-serif;
-            text-align: center;
-            color: #c62828;
-            font-size: clamp(2rem, 5vw, 3rem);
-            text-shadow: 2px 2px 0 rgba(255, 183, 77, 0.45);
-        }
-
-        h1::after {
-            display: block;
-            width: 64px;
-            height: 5px;
-            margin: 12px auto 0;
-            border-radius: 5px;
-            background: #f57c00;
-            content: '';
-        }
-
-        .box-grid {
-            display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 16px;
-            max-width: 900px;
+        .topic-page {
+            max-width: 1100px;
             margin: 0 auto;
+            padding: 40px 20px 60px;
         }
 
-        .small-box {
-            display: block;
-            min-height: 120px;
-            padding: 18px;
-            border: 2px solid #0e7490;
-            border-radius: 10px;
-            background: rgba(255, 255, 255, 0.9);
-            color: inherit;
-            box-shadow: 0 8px 18px rgba(7, 89, 133, 0.12);
+        .topic-header {
             text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .topic-header h1 {
+            margin-bottom: 12px;
+        }
+
+        .topic-header p {
+            max-width: 750px;
+            margin: auto;
+            line-height: 1.7;
+        }
+
+        .topic-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .topic-box {
+            display: block;
+            padding: 28px 22px;
+            min-height: 150px;
             text-decoration: none;
-            transition: transform 160ms ease, box-shadow 160ms ease;
+            color: inherit;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            transition: 0.25s;
         }
 
-        .small-box:hover {
-            transform: translateY(-3px);
-            border-color: #c62828;
-            box-shadow: 0 12px 24px rgba(198, 40, 40, 0.2);
+        .topic-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.13);
         }
 
-        .small-box:nth-child(3n + 1) {
-            border-top: 6px solid #c62828;
+        .topic-number {
+            font-size: 14px;
+            font-weight: bold;
+            opacity: 0.6;
         }
 
-        .small-box:nth-child(3n + 2) {
-            border-top: 6px solid #f57c00;
+        .topic-box h2 {
+            margin: 12px 0 8px;
+            font-size: 22px;
         }
 
-        .small-box:nth-child(3n) {
-            border-top: 6px solid #075985;
-        }
-
-        .small-box h2 {
-            margin: 0 0 10px;
-            font-family: 'Anton', Impact, sans-serif;
-            font-size: 1.1rem;
-            color: #c62828;
-        }
-
-        .small-box p {
+        .topic-box p {
             margin: 0;
-            color: #4b5563;
-            line-height: 1.5;
+            line-height: 1.6;
         }
 
-        @media (max-width: 600px) {
-            .box-grid {
+        @media (max-width: 800px) {
+            .topic-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 550px) {
+            .topic-grid {
                 grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
-<body>
-    <h1>Cac o nho</h1>
 
-    <main class="box-grid">
-        <a class="small-box" href="info.html?box=1" target="_blank" rel="noopener">
-            <h2>O 01</h2>
-            <p>Noi dung o 01</p>
-        </a>
-        <a class="small-box" href="info.html?box=2" target="_blank" rel="noopener">
-            <h2>O 02</h2>
-            <p>Noi dung o 02</p>
-        </a>
-        <a class="small-box" href="info.html?box=3" target="_blank" rel="noopener">
-            <h2>O 03</h2>
-            <p>Noi dung o 03</p>
-        </a>
-        <a class="small-box" href="info.html?box=4" target="_blank" rel="noopener">
-            <h2>O 04</h2>
-            <p>Noi dung o 04</p>
-        </a>
-        <a class="small-box" href="info.html?box=5" target="_blank" rel="noopener">
-            <h2>O 05</h2>
-            <p>Noi dung o 05</p>
-        </a>
-        <a class="small-box" href="info.html?box=6" target="_blank" rel="noopener">
-            <h2>O 06</h2>
-            <p>Noi dung o 06</p>
-        </a>
-        <a class="small-box" href="info.html?box=7" target="_blank" rel="noopener">
-            <h2>O 07</h2>
-            <p>Noi dung o 07</p>
-        </a>
-        <a class="small-box" href="info.html?box=8" target="_blank" rel="noopener">
-            <h2>O 08</h2>
-            <p>Noi dung o 08</p>
-        </a>
-        <a class="small-box" href="info.html?box=9" target="_blank" rel="noopener">
-            <h2>O 09</h2>
-            <p>Noi dung o 09</p>
-        </a>
+<body class="page">
+
+    <main class="topic-page">
+
+        <div class="topic-header">
+            <h1>Tìm hiểu về Dinh Độc Lập</h1>
+            <p>
+                Khám phá lịch sử, kiến trúc, các không gian tiêu biểu
+                và giá trị lịch sử – văn hóa của Dinh Độc Lập.
+            </p>
+        </div>
+
+        <div class="topic-grid">
+
+            <a class="topic-box" href="info.html?box=1">
+                <div class="topic-number">Ô 01</div>
+                <h2>Lịch sử hình thành</h2>
+                <p>Quá trình hình thành và những dấu mốc quan trọng của Dinh Độc Lập.</p>
+            </a>
+
+            <a class="topic-box" href="info.html?box=2">
+                <div class="topic-number">Ô 02</div>
+                <h2>Vị trí và quy mô</h2>
+                <p>Tìm hiểu vị trí, diện tích khuôn viên và quy mô công trình.</p>
+            </a>
+
+            <a class="topic-box" href="info.html?box=3">
+                <div class="topic-number">Ô 03</div>
+                <h2>Kiến trúc Dinh</h2>
+                <p>Khám phá phong cách kiến trúc đặc biệt của kiến trúc sư Ngô Viết Thụ.</p>
+            </a>
+
+            <a class="topic-box" href="info.html?box=4">
+                <div class="topic-number">Ô 04</div>
+                <h2>Không gian bên trong</h2>
+                <p>Tìm hiểu các phòng và khu vực tiêu biểu bên trong Dinh.</p>
+            </a>
+
+            <a class="topic-box" href="info.html?box=5">
+                <div class="topic-number">Ô 05</div>
+                <h2>Phòng Nội các</h2>
+                <p>Một trong những không gian quan trọng phục vụ hoạt động của chính quyền.</p>
+            </a>
+
+            <a class="topic-box" href="info.html?box=6">
+                <div class="topic-number">Ô 06</div>
+                <h2>Hầm chỉ huy</h2>
+                <p>Khám phá hệ thống hầm và khu vực phục vụ liên lạc, chỉ huy.</p>
+            </a>
+
+            <a class="topic-box" href="info.html?box=7">
+                <div class="topic-number">Ô 07</div>
+                <h2>Sân thượng và kỳ đài</h2>
+                <p>Tìm hiểu sân thượng và những ý nghĩa đặc biệt trong kiến trúc Dinh.</p>
+            </a>
+
+            <a class="topic-box" href="info.html?box=8">
+                <div class="topic-number">Ô 08</div>
+                <h2>Tham quan Dinh Độc Lập</h2>
+                <p>Thông tin cơ bản dành cho người muốn tham quan và tìm hiểu di tích.</p>
+            </a>
+
+            <a class="topic-box" href="info.html?box=9">
+                <div class="topic-number">Ô 09</div>
+                <h2>Giá trị lịch sử và văn hóa</h2>
+                <p>Vai trò của Dinh Độc Lập trong lịch sử và văn hóa Việt Nam.</p>
+            </a>
+
+        </div>
+
     </main>
+
 </body>
 </html>
