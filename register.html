@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base href="./">
+    <title>Đăng ký | TP.HCM Guide</title>
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body class="page account-page">
+    <main class="account-shell">
+        <section class="account-card" aria-labelledby="register-title">
+            <div class="account-brand">TP.HCM GUIDE</div>
+            <span class="info-category">THAM GIA CỘNG ĐỒNG</span>
+            <h1 id="register-title">Tạo tài khoản</h1>
+            <p class="account-intro">Đăng ký để lưu địa điểm yêu thích và nhận bản tin chọn lọc về những nơi đáng khám phá.</p>
+            <form id="register-page-form" class="account-form">
+                <label for="register-name-page">Tên hiển thị</label>
+                <input id="register-name-page" type="text" placeholder="Nhập tên của bạn" required>
+                <label for="register-email-page">Email</label>
+                <input id="register-email-page" type="email" placeholder="email@example.com" required>
+                <label for="register-password-page">Mật khẩu</label>
+                <input id="register-password-page" type="password" placeholder="Tối thiểu 6 ký tự" minlength="6" required>
+                <button type="submit" class="account-submit">TẠO TÀI KHOẢN</button>
+            </form>
+            <p id="register-message" class="account-message" aria-live="polite"></p>
+            <p class="account-switch">Đã có tài khoản? <a href="./login.html">Đăng nhập</a></p>
+            <a href="./index.html" class="back-button">← Quay lại trang chủ</a>
+        </section>
+    </main>
+    <script>
+        const registerPageForm = document.getElementById('register-page-form');
+        const registerMessage = document.getElementById('register-message');
+
+        registerPageForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+            registerMessage.textContent = 'Đăng ký thành công! Chào mừng bạn đến với TP.HCM Guide.';
+            registerPageForm.reset();
+        });
+    </script>
+</body>
+</html>

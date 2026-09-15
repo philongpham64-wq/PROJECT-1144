@@ -1,485 +1,1570 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="vi" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PROJECT 1144 | Khám phá thành phố</title>
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <title>Trường THPT Nguyễn Tri Phương | Di sản TP. Hồ Chí Minh</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    colors: {
+                        heritage: {
+                            50: '#fdfbf7',
+                            100: '#f7f1e5',
+                            200: '#ede0c4',
+                            500: '#c29b38',
+                            600: '#a37c27',
+                            700: '#845f1d',
+                            800: '#69491b',
+                            900: '#422c10',
+                        },
+                        crimson: {
+                            600: '#b91c1c',
+                            700: '#991b1b',
+                            800: '#7f1d1d',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: rgba(0,0,0,0.05);
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #c29b38;
+            border-radius: 4px;
+        }
+    </style>
 </head>
-<body class="page">
-<!--start navbar-->
-<nav class="navbar navbar-expand-lg bg-danger shadow-sm site-navbar">
-    <div class="container-fluid">
-        <a class="navbar-brand d-flex align-items-center" href="#">
-            <img src="img.png" alt="TP.HCM logo" width="50" height="50" class="d-inline-block me-2">
-            <span>TP.HCM</span>
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#top">Giới thiệu</a>
-                </li>
-                <li class="nav-item">
-                <a class="nav-link" href="#latest-news">Tin mới nhất</a>
-                </li>
-                <li class="nav-item">
-                <a class="nav-link" href="#more-news">Video</a>
-                </li>
-                <li class="nav-item">
-                <a class="nav-link" href="#site-footer">Liên lạc</a>
-                </li>
-            </ul>
-            <div class="d-flex flex-column flex-lg-row gap-2 mt-3 mt-lg-0" role="group" aria-label="Tài khoản">
-                <button class="btn btn-danger navbar-account-btn me-2" data-bs-toggle="modal" data-bs-target="#form-login">ĐĂNG NHẬP</button>
-                <button class="btn navbar-account-btn navbar-register-btn" data-bs-toggle="modal" data-bs-target="#form-register">ĐĂNG KÝ</button>
+<body class="bg-stone-50 text-stone-800 dark:bg-stone-950 dark:text-stone-100 font-sans transition-colors duration-300 min-h-screen flex flex-col selection:bg-heritage-500 selection:text-white">
+
+    <!-- Navigation Header -->
+    <header class="sticky top-0 z-40 backdrop-blur-md bg-red-800/95 border-b border-red-300/30 text-white shadow-xl">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between gap-4">
+            
+            <!-- Brand Logo / Home Switcher -->
+            <button onclick="showLandmarksHub()" class="flex items-center gap-3 group text-left">
+                <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-white flex items-center justify-center overflow-hidden shadow-lg shadow-red-950/30 group-hover:scale-105 transition-all">
+                    <!-- CHÈN LOGO TRƯỜNG TẠI ĐÂY: thay ./img.png bằng tên ảnh của bạn -->
+                    <img src="./img.png" alt="Logo Trường THPT Nguyễn Tri Phương" class="w-full h-full object-contain">
+                </div>
+                <div>
+                    <h1 class="font-serif font-bold text-base sm:text-xl tracking-wide leading-tight text-white">
+                        TRƯỜNG THPT NGUYỄN TRI PHƯƠNG
+                    </h1>
+                    <p class="text-[10px] sm:text-xs text-red-100 font-medium tracking-widest uppercase">Cổng Thuyết Trình & Trắc Nghiệm Di Tích</p>
+                </div>
+            </button>
+
+            <!-- Search Input -->
+            <div class="flex-1 max-w-md hidden md:block relative">
+                <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-stone-400 text-sm"></i>
+                <input type="text" id="globalSearchInput" placeholder="Tìm địa danh, phòng trưng bày, câu hỏi trắc nghiệm..." 
+                    class="w-full pl-11 pr-4 py-2 text-sm bg-red-950/40 border border-red-300/30 rounded-full focus:ring-2 focus:ring-red-300 focus:border-red-300 text-white placeholder-red-100/60 outline-none transition-all">
+            </div>
+
+            <!-- Action Controls -->
+            <div class="flex items-center gap-2 sm:gap-3">
+                <button onclick="showLandmarksHub()" class="px-3 py-2 sm:px-4 sm:py-2.5 rounded-xl bg-red-950/40 hover:bg-red-900 text-white border border-red-300/30 font-medium text-xs sm:text-sm transition-all flex items-center gap-2">
+                    <i class="fa-solid fa-layer-group"></i>
+                    <span class="hidden sm:inline">Tất cả địa danh</span>
+                </button>
+
+                <a href="./login.html" class="px-3 py-2 sm:px-4 sm:py-2.5 rounded-xl bg-red-950/40 hover:bg-red-900 text-white border border-red-300/30 font-medium text-xs sm:text-sm transition-all flex items-center gap-2">
+                    <i class="fa-solid fa-right-to-bracket"></i>
+                    <span class="hidden sm:inline">Đăng nhập</span>
+                </a>
+
+                <a href="./register.html" class="px-3 py-2 sm:px-4 sm:py-2.5 rounded-xl bg-white hover:bg-red-50 text-red-800 border border-white font-bold text-xs sm:text-sm transition-all flex items-center gap-2">
+                    <i class="fa-solid fa-user-plus"></i>
+                    <span class="hidden sm:inline">Đăng ký</span>
+                </a>
+
+                <!-- Dark Mode Toggle -->
+                <button id="themeToggle" aria-label="Toggle Theme" class="p-2 sm:p-2.5 rounded-xl bg-red-950/40 hover:bg-red-900 text-red-100 border border-red-300/30 transition-colors">
+                    <i class="fa-solid fa-moon dark:hidden text-base sm:text-lg"></i>
+                    <i class="fa-solid fa-sun hidden dark:block text-base sm:text-lg text-amber-400"></i>
+                </button>
             </div>
         </div>
-    </div>
-</nav>
-<!--end navbar-->
+    </header>
 
-<header id="top" class="site-hero container-fluid">
-  <div class="site-hero-content">
-    <span class="site-hero-kicker">KHÁM PHÁ SÀI GÒN</span>
-    <h1>Điểm đến nổi bật của TP.HCM</h1>
-    <p>Từ di tích lịch sử, kiến trúc cổ kính đến cảnh quan hiện đại, mỗi địa danh đều mang một câu chuyện riêng của thành phố.</p>
-    <div class="site-hero-actions">
-      <a href="#latest-news" class="btn btn-danger btn-lg fw-bold">Khám phá ngay</a>
-      <a href="#site-footer" class="btn btn-outline-light btn-lg fw-bold">Liên hệ</a>
-    </div>
-    <div class="site-hero-tags" aria-label="Chủ đề nổi bật">
-      <span>Di tích</span>
-      <span>Ẩm thực</span>
-      <span>Check-in</span>
-    </div>
-  </div>
-</header>
+    <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
 
-<section class="featured-panel container-fluid" aria-label="Điểm nhấn du lịch">
-  <div class="featured-panel-inner">
-    <div class="featured-copy">
-      <span class="featured-kicker">TP.HCM GUIDE</span>
-      <h2>Những điểm đến nổi bật của thành phố</h2>
-      <p>Khám phá không gian lịch sử, văn hóa và cảnh quan sống động của Thành phố Hồ Chí Minh qua những địa danh đáng ghé thăm nhất.</p>
-      <div class="featured-pills">
-        <span>Di tích</span>
-        <span>Ẩm thực</span>
-        <span>Chụp ảnh</span>
-      </div>
-    </div>
-    <div class="featured-list">
-      <article class="mini-story">
-        <span class="mini-badge">Hot</span>
-        <h3>Dinh Độc Lập</h3>
-        <p>Địa chỉ: 135 Nam Kỳ Khởi Nghĩa, Quận 1. Nơi lưu giữ ký ức lịch sử và kiến trúc mang dấu ấn của Sài Gòn xưa.</p>
-      </article>
-      <article class="mini-story accent">
-        <span class="mini-badge">Nổi bật</span>
-        <h3>Chợ Bến Thành</h3>
-        <p>Địa chỉ: Q.1. Giao thoa giữa mua sắm, ẩm thực và văn hóa địa phương, phù hợp cho khách du lịch cả ngày lẫn tối.</p>
-      </article>
-    </div>
-  </div>
-</section>
+        <!-- VIEW 1: LANDMARKS HUB (Main Landing Grid of all Landmarks) -->
+        <section id="landmarksHubView" class="space-y-10">
+            <!-- Hero Banner -->
+            <div class="relative bg-stone-900 rounded-3xl text-white overflow-hidden p-8 sm:p-12 border border-heritage-500/30 shadow-2xl">
+                <!-- CHÈN ẢNH NỀN TRANG CHỦ TẠI ĐÂY: thay URL trong url('...') -->
+                <div class="absolute inset-0 bg-cover bg-center opacity-30 mix-blend-luminosity scale-105" style="background-image: url('https://images.unsplash.com/photo-1583417319070-4a69db38a482?auto=format&fit=crop&q=80&w=1600');"></div>
+                <div class="absolute inset-0 bg-gradient-to-r from-stone-950 via-stone-900/85 to-transparent"></div>
 
-<section class="editorial-section container-fluid" aria-label="Điểm đến nổi bật">
-  <div class="editorial-layout">
-    <article class="editorial-featured">
-      <div class="editorial-image-wrap">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLUJvUmHhYTUTVqk-xijLDk8Mhh5g0o7w_dpHP8AOufw&s=10" alt="Mặt tiền ngoài Dinh Độc Lập">
-      </div>
-      <div class="editorial-content">
-        <span class="section-badge">Chuyên đề</span>
-        <h3>Khám phá những địa điểm du lịch đẹp nhất của TP.HCM</h3>
-        <p>Với sự kết hợp giữa di tích lịch sử, phố cổ, sông nước và các công trình hiện đại, TP.HCM là nơi du khách có thể trải nghiệm nhiều phong cách trong chỉ một ngày.</p>
-        <a href="blank.html" target="_blank" rel="noopener" class="text-link">Xem chi tiết</a>
-      </div>
-    </article>
+                <div class="relative z-10 max-w-3xl">
+                    <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-heritage-500/20 border border-heritage-500/40 text-amber-300 text-xs font-semibold uppercase tracking-wider mb-4 backdrop-blur-md">
+                        <i class="fa-solid fa-map-location-dot text-amber-400"></i> Hệ Thống Thuyết Trình Đa Địa Danh
+                    </span>
+                    
+                    <h2 class="font-serif text-3xl sm:text-5xl font-extrabold tracking-tight text-amber-50 leading-tight mb-4">
+                        Khám Phá Danh Lam Thắng Cảnh
+                        <span class="block text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-heritage-500 to-amber-100 text-2xl sm:text-4xl mt-2 italic font-normal">
+                            Thành Phố Hồ Chí Minh
+                        </span>
+                    </h2>
 
-    <aside class="editorial-sidebar">
-      <div class="sidebar-box">
-        <h3>Đọc nhiều nhất</h3>
-        <ol class="trend-list">
-          <li><span>01</span><a href="blank.html" target="_blank" rel="noopener">Nhà thờ Đức Bà - điểm check-in đẹp giữa trung tâm</a></li>
-          <li><span>02</span><a href="blank.html" target="_blank" rel="noopener">Bến Bạch Đằng - trải nghiệm cảnh sông Sài Gòn về đêm</a></li>
-          <li><span>03</span><a href="blank.html" target="_blank" rel="noopener">Landmark 81 - góc nhìn đẹp nhất thành phố</a></li>
-        </ol>
-      </div>
-    </aside>
-  </div>
-</section>
+                    <p class="text-stone-300 text-sm sm:text-base leading-relaxed mb-6 font-light">
+                        Lựa chọn một trong các địa danh nổi tiếng bên dưới để mở giao diện học tập chi tiết, chế độ trình chiếu slideshow chuyên nghiệp và bộ bài tập trắc nghiệm 20 câu hỏi độc lập cho từng danh thắng.
+                    </p>
 
-<section class="ticker-bar container-fluid" aria-label="Tin du lịch nóng">
-  <div class="ticker-inner">
-    <span class="ticker-label">DU LỊCH NÓNG</span>
-    <div class="ticker-track" aria-label="Tin du lịch đang diễn ra">
-      <div class="ticker-track-inner">
-        <span>Di tích lịch sử hút khách quốc tế.</span>
-        <span>Chợ Bến Thành, Nhà thờ Đức Bà và Dinh Độc Lập.</span>
-        <span>Vẻ đẹp đêm Sài Gòn đang hot.</span>
-        <span>Di tích lịch sử hút khách quốc tế.</span>
-        <span>Chợ Bến Thành, Nhà thờ Đức Bà và Dinh Độc Lập.</span>
-        <span>Vẻ đẹp đêm Sài Gòn đang hot.</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="category-section container-fluid" aria-label="Chuyên mục du lịch">
-  <div class="category-header">
-    <h2>Chuyên mục</h2>
-    <a href="#latest-news">Xem tất cả</a>
-  </div>
-  <div class="category-grid">
-    <article class="category-card">
-      <span class="category-icon">🏛️</span>
-      <h3>Lịch sử</h3>
-      <p>Khám phá các di tích mang dấu ấn thời kỳ Sài Gòn xưa như Dinh Độc Lập và Nhà thờ Đức Bà.</p>
-    </article>
-    <article class="category-card">
-      <span class="category-icon">🍜</span>
-      <h3>Ẩm thực</h3>
-      <p>Trải nghiệm món ngon đường phố, quán ăn truyền thống và các món đặc sản nổi tiếng của thành phố.</p>
-    </article>
-    <article class="category-card">
-      <span class="category-icon">🌆</span>
-      <h3>Skyline</h3>
-      <p>Địa điểm ngắm thành phố từ trên cao, đặc biệt đẹp vào buổi chiều tối và khi đêm xuống.</p>
-    </article>
-    <article class="category-card">
-      <span class="category-icon">📸</span>
-      <h3>Check-in</h3>
-      <p>Những góc chụp ảnh đẹp, nổi bật với phong cảnh đường phố, sông nước và kiến trúc kết hợp hiện đại.</p>
-    </article>
-    <article class="category-card">
-      <span class="category-icon">🚤</span>
-      <h3>Sông nước</h3>
-      <p>Tham gia du thuyền, ngắm thành phố từ trên mặt nước và trải nghiệm không khí dịu mát ven sông.</p>
-    </article>
-    <article class="category-card">
-      <span class="category-icon">🌿</span>
-      <h3>Thiên nhiên</h3>
-      <p>Khám phá các công viên, khu rừng và điểm nghỉ dưỡng giúp bạn thư giãn giữa lòng thành phố.</p>
-    </article>
-  </div>
-</section>
-
-<section class="video-section container-fluid" aria-label="Video du lịch">
-  <div class="video-header">
-    <h2>Video du lịch</h2>
-    <a href="#site-footer">Xem thêm</a>
-  </div>
-  <div class="video-grid">
-    <article class="video-card large-video">
-      <div class="video-thumb thumb-one">
-        <button class="play-button" aria-label="Phát video">▶</button>
-      </div>
-      <div class="video-copy">
-        <span>Phóng sự</span>
-        <h3>Hành trình khám phá các điểm du lịch đẹp ở TP.HCM</h3>
-      </div>
-    </article>
-    <article class="video-card">
-      <div class="video-thumb thumb-two">
-        <button class="play-button" aria-label="Phát video">▶</button>
-      </div>
-      <div class="video-copy">
-        <span>Góc nhìn</span>
-        <h3>Đêm Sài Gòn với ánh đèn, sông nước và phố cổ</h3>
-      </div>
-    </article>
-    <article class="video-card">
-      <div class="video-thumb thumb-three">
-        <button class="play-button" aria-label="Phát video">▶</button>
-      </div>
-      <div class="video-copy">
-        <span>Khám phá</span>
-        <h3>Du lịch văn hóa tại các địa điểm lịch sử nổi bật</h3>
-      </div>
-    </article>
-  </div>
-</section>
-
-<section class="analysis-section container-fluid" aria-label="Khám phá du lịch">
-  <div class="analysis-header">
-    <h2>Khám phá TP.HCM</h2>
-  </div>
-  <div class="analysis-grid">
-    <article class="analysis-card">
-      <span class="analysis-tag">Điểm đến</span>
-      <h3>Nhà thờ Đức Bà mang vẻ đẹp kiến trúc và góc chụp ảnh đẹp giữa lòng thành phố</h3>
-      <p>Đây là một trong những địa điểm du lịch nổi tiếng với phong cách kiến trúc cổ điển và không gian yên bình ở trung tâm.</p>
-      <a href="blank.html" target="_blank" rel="noopener">Đọc tiếp</a>
-    </article>
-    <article class="analysis-card">
-      <span class="analysis-tag">Hành trình</span>
-      <h3>Đường phố Sài Gòn về đêm với ánh đèn, ẩm thực và cảm giác sống động</h3>
-      <p>Khám phá những con đường đẹp, quán ăn nổi tiếng và góc nhìn ngắm thành phố từ nhiều chiều khác nhau.</p>
-      <a href="blank.html" target="_blank" rel="noopener">Đọc tiếp</a>
-    </article>
-    <article class="analysis-card">
-      <span class="analysis-tag">Lịch sử</span>
-      <h3>Dinh Độc Lập là nơi lưu giữ ký ức quan trọng của Sài Gòn xưa</h3>
-      <p>Địa danh này thu hút du khách nhờ giá trị lịch sử, kiến trúc độc đáo và không gian văn hóa đặc trưng.</p>
-      <a href="blank.html" target="_blank" rel="noopener">Đọc tiếp</a>
-    </article>
-  </div>
-</section>
-
-<!-- Modal -->
-    <div class="modal fade" id="form-login" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <a class="navbar-brand d-flex align-items-center" href="#">
-                        <img src="src/images.png" alt="logo" width="150" height="100" class="d-inline-block align-text-top me-2">
-                        <div>BAOMOI</div>
-                    </a>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form id="login-form">
-                        <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label fs-4">Email</label>
-                            <input placeholder="nhập_email" type="email" class="form-control fs-5 p-3" id="exampleInputEmail1" aria-describedby="emailHelp">
-                        </div>
-                        <div class="mb-3">
-                            <label for="exampleInputPassword1" class="form-label fs-4">Mật khẩu</label>
-                            <input placeholder="nhập_mật_khẩu" type="password" class="form-control fs-5 p-3" id="exampleInputPassword1">
-                        </div>
-                        <div class="mb-3 form-check fs-4">
-                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                            <label class="form-check-label" for="exampleCheck1">Hiện mật khẩu</label>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger fs-4 fw-bold w-100">ĐĂNG NHẬP</button>
+                    <div class="flex flex-wrap gap-4 text-xs sm:text-sm font-medium text-amber-200/90">
+                        <span class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-heritage-500"></i> Nhiều Địa Danh Lịch Sử</span>
+                        <span class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-heritage-500"></i> Slideshow Thuyết Trình</span>
+                        <span class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-heritage-500"></i> 20 Câu Trắc Nghiệm / Địa Danh</span>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-<!--End Form login-->
 
-  <!-- Modal register -->
-    <div class="modal fade" id="form-register" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
+            <!-- Landmark Cards Grid -->
             <div>
-              <span class="modal-kicker">THAM GIA CỘNG ĐỒNG</span>
-              <h2 class="modal-title" id="registerModalLabel">Tạo tài khoản</h2>
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-3 border-b border-stone-200 dark:border-stone-800">
+                    <div>
+                        <h3 class="font-serif font-bold text-2xl text-stone-900 dark:text-stone-100">
+                            Danh Sách Các Danh Lam Thắng Cảnh
+                        </h3>
+                        <p class="text-xs sm:text-sm text-stone-500 dark:text-stone-400">Nhấp vào một ô địa danh để bắt đầu xem tư liệu và làm bài trắc nghiệm 20 câu</p>
+                    </div>
+                    <span id="hubCountBadge" class="text-xs font-semibold px-3 py-1 bg-heritage-100 dark:bg-stone-800 text-heritage-800 dark:text-amber-400 rounded-full w-fit">
+                        6 Địa danh tiêu biểu
+                    </span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="landmarksGrid">
+                    <!-- Dynamic rendering of landmark cards -->
+                </div>
             </div>
-            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Đóng"></button>
-          </div>
-          <form id="register-form">
-            <div class="modal-body">
-              <label class="form-label" for="register-name">Tên hiển thị</label>
-              <input class="form-control mb-3" id="register-name" type="text" placeholder="Nhập tên của bạn" required>
-              <label class="form-label" for="register-email">Email</label>
-              <input class="form-control mb-3" id="register-email" type="email" placeholder="email@example.com" required>
-              <label class="form-label" for="register-password">Mật khẩu</label>
-              <input class="form-control" id="register-password" type="password" placeholder="Tối thiểu 6 ký tự" minlength="6" required>
-              <p class="form-note">Đăng ký để nhận bản tin chọn lọc mỗi sáng.</p>
+        </section>
+
+        <!-- VIEW 2: SINGLE LANDMARK WORKSPACE (Switched dynamically when landmark selected) -->
+        <section id="landmarkDetailView" class="hidden space-y-8">
+            
+            <!-- Top Navigation & Breadcrumb -->
+            <div class="flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-stone-200 dark:border-stone-800">
+                <button onclick="showLandmarksHub()" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-stone-200 dark:bg-stone-800 text-stone-800 dark:text-stone-200 hover:bg-stone-300 dark:hover:bg-stone-700 font-semibold text-xs sm:text-sm transition-all">
+                    <i class="fa-solid fa-arrow-left"></i> Quay lại Danh sách Địa danh
+                </button>
+
+                <div class="flex items-center gap-2">
+                    <button onclick="startPresentation()" class="px-4 py-2 rounded-xl bg-gradient-to-r from-crimson-700 to-amber-600 hover:from-crimson-600 hover:to-amber-500 text-white font-medium text-xs sm:text-sm shadow-md transition-all flex items-center gap-2">
+                        <i class="fa-solid fa-desktop"></i>
+                        <span>Thuyết trình Slideshow</span>
+                    </button>
+                    <button onclick="scrollToLandmarkSection('landmarkQuizSection')" class="px-4 py-2 rounded-xl bg-heritage-600 hover:bg-heritage-700 text-white font-medium text-xs sm:text-sm transition-all flex items-center gap-2">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                        <span>Trắc nghiệm 20 Câu</span>
+                    </button>
+                </div>
             </div>
-            <div class="modal-footer">
-              <button type="submit" class="btn btn-danger fw-bold w-100">TẠO TÀI KHOẢN</button>
+
+            <!-- Active Landmark Banner & Info -->
+            <div id="activeLandmarkHeader" class="relative bg-stone-900 rounded-3xl text-white overflow-hidden p-6 sm:p-10 border border-heritage-500/30 shadow-xl">
+                <!-- Dynamically filled -->
             </div>
-          </form>
+
+            <!-- Tab Navigation for Active Landmark -->
+            <div class="flex items-center gap-2 border-b border-stone-200 dark:border-stone-800 pb-3 overflow-x-auto custom-scrollbar">
+                <button id="tabCardsBtn" onclick="switchLandmarkTab('cards')" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-heritage-600 text-white shadow-md transition-all whitespace-nowrap">
+                    <i class="fa-solid fa-cubes mr-2"></i>Các Mục & Điểm Tham Quan
+                </button>
+                <button id="tabQuizBtn" onclick="switchLandmarkTab('quiz')" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-medium bg-stone-200 dark:bg-stone-800 text-stone-700 dark:text-stone-300 hover:bg-stone-300 dark:hover:bg-stone-700 transition-all whitespace-nowrap">
+                    <i class="fa-solid fa-file-pen mr-2"></i>Bài Trắc Nghiệm (20 Câu)
+                </button>
+                <button id="tabInfoBtn" onclick="switchLandmarkTab('info')" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-medium bg-stone-200 dark:bg-stone-800 text-stone-700 dark:text-stone-300 hover:bg-stone-300 dark:hover:bg-stone-700 transition-all whitespace-nowrap">
+                    <i class="fa-solid fa-circle-info mr-2"></i>Thông Tin Tham Quan & Bản Đồ
+                </button>
+            </div>
+
+            <!-- TAB CONTENT 1: Sub-topics Cards Grid -->
+            <div id="tabContentCards" class="space-y-6">
+                <div class="flex items-center justify-between">
+                    <h4 class="font-serif font-bold text-xl text-stone-900 dark:text-white" id="subTopicsTitle">
+                        Các Mục Thuyết Trình Chi Tiết
+                    </h4>
+                    <span id="subTopicsCount" class="text-xs font-semibold px-3 py-1 bg-stone-200 dark:bg-stone-800 text-stone-700 dark:text-stone-300 rounded-full">
+                        Hiển thị 8 mục
+                    </span>
+                </div>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" id="landmarkSubTopicsGrid">
+                    <!-- Dynamic rendering of sub-topics -->
+                </div>
+            </div>
+
+            <!-- TAB CONTENT 2: 20-Question Interactive Quiz Engine -->
+            <div id="tabContentQuiz" class="hidden space-y-6">
+                <div class="bg-gradient-to-br from-stone-900 via-stone-850 to-stone-950 rounded-3xl p-6 sm:p-10 border border-heritage-500/30 text-white shadow-2xl relative overflow-hidden" id="landmarkQuizSection">
+                    <div class="max-w-4xl mx-auto">
+                        
+                        <!-- Quiz Header Info -->
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-4 border-b border-stone-800">
+                            <div>
+                                <span class="px-3 py-1 bg-amber-500/20 border border-amber-500/40 text-amber-300 text-xs font-semibold uppercase tracking-wider rounded-full inline-block mb-2">
+                                    <i class="fa-solid fa-award mr-1"></i> Bộ Trắc Nghiệm 20 Câu Hỏi
+                                </span>
+                                <h3 id="quizLandmarkTitle" class="font-serif font-bold text-2xl sm:text-3xl text-amber-100">
+                                    Trắc Nghiệm Kiến Thức Lịch Sử & Kiến Trúc
+                                </h3>
+                            </div>
+                            <div class="flex items-center gap-3 bg-stone-950/80 px-4 py-3 rounded-2xl border border-stone-700/80">
+                                <div class="text-right">
+                                    <span class="block text-[10px] text-stone-400 uppercase tracking-widest">Điểm Số Hiện Tại</span>
+                                    <span id="quizScoreDisplay" class="font-serif font-bold text-2xl text-amber-400">0 / 100</span>
+                                </div>
+                                <i class="fa-solid fa-trophy text-amber-400 text-2xl"></i>
+                            </div>
+                        </div>
+
+                        <!-- 20 Question Palette / Map -->
+                        <div class="mb-6">
+                            <span class="block text-xs text-stone-400 mb-2 font-medium">Bản đồ 20 câu hỏi (Bấm số để chuyển câu):</span>
+                            <div id="quizQuestionMap" class="flex flex-wrap gap-2">
+                                <!-- 20 question buttons generated dynamically -->
+                            </div>
+                        </div>
+
+                        <!-- Question Card -->
+                        <div class="bg-stone-950/80 backdrop-blur-md rounded-2xl p-5 sm:p-8 border border-stone-800 shadow-inner">
+                            <div class="flex items-center justify-between mb-4 text-xs font-semibold text-amber-400 uppercase tracking-widest">
+                                <span id="quizCurrentProgress">Câu hỏi 1 / 20</span>
+                                <span id="quizQuestionCategory" class="px-2.5 py-0.5 rounded bg-stone-800 text-stone-300">Lịch sử & Sự kiện</span>
+                            </div>
+
+                            <h4 id="quizQuestionText" class="text-base sm:text-xl font-bold text-stone-100 mb-6 leading-relaxed">
+                                Nội dung câu hỏi đang được tải...
+                            </h4>
+
+                            <!-- Answer Options -->
+                            <div id="quizOptionsContainer" class="space-y-3">
+                                <!-- Options rendered dynamically -->
+                            </div>
+
+                            <!-- Feedback Message -->
+                            <div id="quizFeedbackBox" class="hidden mt-5 p-4 rounded-xl text-xs sm:text-sm font-medium"></div>
+
+                            <!-- Quiz Navigation Controls -->
+                            <div class="mt-8 flex items-center justify-between pt-4 border-t border-stone-800">
+                                <button onclick="prevQuizQuestion()" id="prevQuizBtn" class="px-4 py-2.5 rounded-xl bg-stone-800 hover:bg-stone-700 text-stone-300 font-semibold text-xs sm:text-sm transition-all">
+                                    <i class="fa-solid fa-chevron-left mr-1"></i> Câu trước
+                                </button>
+                                
+                                <button onclick="resetCurrentQuiz()" class="text-xs text-stone-400 hover:text-white transition-colors">
+                                    <i class="fa-solid fa-rotate-left mr-1"></i> Làm lại từ đầu
+                                </button>
+
+                                <button onclick="nextQuizQuestion()" id="nextQuizBtn" class="px-5 py-2.5 rounded-xl bg-heritage-500 hover:bg-heritage-600 text-stone-950 font-bold text-xs sm:text-sm transition-all">
+                                    Câu tiếp theo <i class="fa-solid fa-chevron-right ml-1"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB CONTENT 3: Visitor Info & Map -->
+            <div id="tabContentInfo" class="hidden">
+                <div class="bg-white dark:bg-stone-900 rounded-3xl p-6 sm:p-10 border border-stone-200 dark:border-stone-800 shadow-xl">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center" id="visitorInfoContainer">
+                        <!-- Visitor info rendered dynamically -->
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- Detail Drawer / Modal for Sub-topics -->
+    <div id="subTopicModal" class="fixed inset-0 z-50 hidden bg-stone-950/70 backdrop-blur-sm flex justify-end transition-opacity">
+        <div class="w-full max-w-3xl bg-white dark:bg-stone-900 h-full overflow-y-auto shadow-2xl flex flex-col p-6 sm:p-10 animate-in slide-in-from-right duration-300">
+            <!-- Modal Header -->
+            <div class="flex items-center justify-between pb-4 border-b border-stone-200 dark:border-stone-800">
+                <div class="flex items-center gap-2">
+                    <span id="modalBadge" class="px-3 py-1 bg-heritage-100 dark:bg-heritage-900/60 text-heritage-800 dark:text-amber-300 text-xs font-bold rounded-lg uppercase">
+                        DETAIL-01
+                    </span>
+                    <span id="modalCategory" class="px-2.5 py-1 bg-stone-100 dark:bg-stone-800 text-stone-600 dark:text-stone-300 text-xs rounded-lg font-medium">
+                        Khu vực tham quan
+                    </span>
+                </div>
+                <button onclick="closeSubTopicModal()" class="w-9 h-9 rounded-full bg-stone-100 dark:bg-stone-800 text-stone-500 hover:text-stone-900 dark:hover:text-white flex items-center justify-center transition-colors">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+
+            <!-- Modal Content Body -->
+            <div class="py-6 flex-1">
+                <h2 id="modalTitle" class="font-serif text-2xl sm:text-4xl font-extrabold text-stone-900 dark:text-white mb-4 leading-tight"></h2>
+                
+                <div class="flex items-center gap-4 text-sm font-bold text-stone-700 dark:text-stone-200 mb-6 pb-4 border-b border-stone-100 dark:border-stone-800">
+                    <span><i class="fa-solid fa-location-dot mr-1 text-heritage-500"></i> Vị trí: <strong id="modalLocation" class="font-bold">Tầng 1</strong></span>
+                    <span><i class="fa-solid fa-clock mr-1 text-heritage-500"></i> Thời lượng: <strong class="font-bold">3 phút</strong></span>
+                </div>
+
+                <!-- ẢNH CHI TIẾT: đặt file img1.png cùng thư mục với index.html -->
+                <img id="modalImage" src="./img1.png" alt="Hình ảnh chi tiết" class="hidden w-full h-auto max-h-[32rem] object-contain rounded-2xl border border-stone-200 dark:border-stone-700 bg-stone-100 dark:bg-stone-800 shadow-md mb-6">
+
+                <div id="modalBody" class="space-y-5 text-stone-900 dark:text-white text-base sm:text-lg font-semibold leading-relaxed">
+                    <!-- Content inserted dynamically -->
+                </div>
+            </div>
+
+            <!-- Modal Footer Controls -->
+            <div class="pt-4 border-t border-stone-200 dark:border-stone-800 flex items-center justify-between">
+                <button id="modalPrevBtn" class="px-4 py-2.5 rounded-xl border border-stone-200 dark:border-stone-700 text-xs sm:text-sm font-semibold text-stone-700 dark:text-stone-300 hover:bg-stone-100 dark:hover:bg-stone-800 transition-colors">
+                    <i class="fa-solid fa-arrow-left mr-2"></i>Mục trước
+                </button>
+                <button id="modalNextBtn" class="px-4 py-2.5 rounded-xl bg-heritage-600 hover:bg-heritage-700 text-white text-xs sm:text-sm font-semibold shadow-md transition-all">
+                    Mục tiếp theo<i class="fa-solid fa-arrow-right ml-2"></i>
+                </button>
+            </div>
         </div>
-      </div>
     </div>
-  <!-- End Modal register -->
 
-  <section class="quick-stats container-fluid" aria-label="Tổng quan du lịch">
-    <div class="quick-stat"><strong>15+</strong><span>Điểm đến nổi bật</span></div>
-    <div class="quick-stat"><strong>4.8/5</strong><span>Đánh giá du khách</span></div>
-    <div class="quick-stat"><strong>1 ngày</strong><span>Khám phá trọn vẹn</span></div>
-  </section>
+    <!-- Fullscreen Presentation Slideshow Overlay -->
+    <div id="presentationOverlay" class="fixed inset-0 z-50 hidden bg-stone-950 text-white flex flex-col justify-between p-6 sm:p-12 animate-in fade-in duration-300">
+        <!-- Presentation Top Control Bar -->
+        <div class="flex items-center justify-between border-b border-stone-800 pb-4">
+            <div class="flex items-center gap-3">
+                <span class="w-3 h-3 rounded-full bg-crimson-600 animate-ping"></span>
+                <span id="slideLandmarkName" class="font-serif font-bold text-amber-400 text-lg">CHẾ ĐỘ THUYẾT TRÌNH SLIDE</span>
+            </div>
+            <div class="flex items-center gap-4">
+                <span id="slideIndicator" class="text-sm font-mono text-stone-400">Slide 1 / 8</span>
+                <button onclick="stopPresentation()" class="px-4 py-2 rounded-xl bg-stone-800 hover:bg-stone-700 text-stone-300 text-xs font-bold uppercase tracking-wider transition-colors">
+                    Thoát Slide (ESC)
+                </button>
+            </div>
+        </div>
 
-<!--start tin tức mới nhất-->
-    <section id="latest-news" class="latest-news container-fluid mt-4" aria-labelledby="latest-news-title">
-      <h2 id="latest-news-title" class="latest-news-title">Danh lam thắng cảnh TP.HCM</h2>
-      <div class="row">
-        <!--cột bên trái-->
-        <div class="col-md-4 mb-4">
-          <article class="card latest-news-card h-100">
-            <img class="card-img-top latest-news-image" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLUJvUmHhYTUTVqk-xijLDk8Mhh5g0o7w_dpHP8AOufw&s=10" alt="Mặt tiền ngoài Dinh Độc Lập">
-            <div class="card-body">
-              <div class="article-meta"><span>Di tích lịch sử</span><time datetime="2026-09-12">12/09/2026</time></div>
-              <h5 class="card-title">Dinh Độc Lập</h5>
-              <p class="card-text">Địa chỉ: 135 Nam Kỳ Khởi Nghĩa, Quận 1. Đây là biểu tượng lịch sử của TP.HCM, nổi tiếng với kiến trúc cổ kính và không gian mang đậm dấu ấn Sài Gòn xưa.</p>
-              <a href="blank.html" target="_blank" rel="noopener" class="btn btn-danger btn-lg fw-bold">Xem chi tiết</a>
+        <!-- Presentation Slide Main View -->
+        <div class="flex-1 flex flex-col justify-center max-w-5xl mx-auto w-full py-8 overflow-y-auto">
+            <span id="slideBadge" class="inline-block px-3 py-1 bg-heritage-500/20 text-amber-300 border border-heritage-500/40 text-xs font-bold uppercase tracking-widest rounded-full w-fit mb-4">
+                DETAIL-01
+            </span>
+            <h2 id="slideTitle" class="font-serif font-extrabold text-3xl sm:text-5xl text-amber-100 mb-6 leading-tight">
+                Tiêu đề Slide
+            </h2>
+            <div id="slideBody" class="text-stone-300 text-base sm:text-xl leading-relaxed space-y-4 font-light">
+                <!-- Slide content inserted via JS -->
             </div>
-          </article>
         </div>
-        <!--cột ở giữa-->
-        <div class="col-md-4 mb-4">
-          <article class="card latest-news-card h-100">
-            <img class="card-img-top latest-news-image" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJeqppzMnO7lagVdmZMGbevAzPY9wPKYWLJEalOnKBeA&s=10" alt="Chợ Bến Thành">
-            <div class="card-body">
-              <div class="article-meta"><span>Ẩm thực & mua sắm</span><time datetime="2026-09-12">12/09/2026</time></div>
-              <h5 class="card-title">Chợ Bến Thành</h5>
-              <p class="card-text">Địa chỉ: Q.1. Chợ nổi tiếng với hàng hóa đa dạng, quà lưu niệm, món ăn đường phố và không khí nhộn nhịp đặc trưng của Sài Gòn.</p>
-              <a href="blank.html" target="_blank" rel="noopener" class="btn btn-danger btn-lg fw-bold">Xem chi tiết</a>
-            </div>
-          </article>
-        </div>
-        <!--cột bên phải-->
-        <div class="col-md-4 mb-4">
-          <article class="card latest-news-card h-100">
-            <img class="card-img-top latest-news-image" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxqQd7Pzr4gTesgaQgSRDFIEMUX6urtxziuzm0stowdg&s=10" alt="Nhà thờ Đức Bà">
-            <div class="card-body">
-              <div class="article-meta"><span>Kiến trúc</span><time datetime="2026-09-12">12/09/2026</time></div>
-              <h5 class="card-title">Nhà thờ Đức Bà</h5>
-              <p class="card-text">Địa chỉ: 1 Công xã Paris, Bến Nghé, Quận 1. Tọa lạc giữa trung tâm thành phố và nổi tiếng với kiến trúc cổ điển và góc chụp ảnh đẹp.</p>
-              <a href="blank.html" target="_blank" rel="noopener" class="btn btn-danger btn-lg fw-bold">Xem chi tiết</a>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-<!--end tin tức mới nhất--> 
-<!--start tin tức mới nhất-->
-    <section id="more-news" class="latest-news container-fluid mt-4" aria-labelledby="latest-news-title">
-      <div class="row">
-        <!--cột bên trái-->
-        <div class="col-md-4 mb-4">
-          <article class="card latest-news-card h-100">
-            <img class="card-img-top latest-news-image" src="https://images.unsplash.com/photo-1505761671935-60e5b5d5f6a8?auto=format&fit=crop&w=1200&q=80" alt="Bến Bạch Đằng">
-            <div class="card-body">
-              <h5 class="card-title">Bến Bạch Đằng</h5>
-              <p class="card-text">Nằm ven sông Sài Gòn, nơi đây trở thành điểm dừng chân lý tưởng cho du khách muốn thưởng thức không khí đêm, ngắm cầu Ba Son và cảm nhận nhịp sống sôi động của thành phố.</p>
-              <a href="blank.html" target="_blank" rel="noopener" class="btn btn-danger btn-lg fw-bold">Xem chi tiết</a>
-            </div>
-          </article>
-        </div>
-        <!--cột ở giữa-->
-        <div class="col-md-4 mb-4">
-          <article class="card latest-news-card h-100">
-            <img class="card-img-top latest-news-image" src="https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=1200&q=80" alt="Landmark 81">
-            <div class="card-body">
-              <h5 class="card-title">Landmark 81</h5>
-              <p class="card-text">Được biết đến như biểu tượng đô thị hiện đại, Landmark 81 là địa điểm ngắm toàn cảnh TP.HCM từ độ cao, thu hút nhiều du khách muốn trải nghiệm không gian hiện đại và đêm thành phố lung linh.</p>
-              <a href="blank.html" target="_blank" rel="noopener" class="btn btn-danger btn-lg fw-bold">Xem chi tiết</a>
-            </div>
-          </article>
-        </div>
-        <!--cột bên phải-->
-        <div class="col-md-4 mb-4">
-          <article class="card latest-news-card h-100">
-            <img class="card-img-top latest-news-image" src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1200&q=80" alt="Núi Bà Đen">
-            <div class="card-body">
-              <h5 class="card-title">Núi Bà Đen</h5>
-              <p class="card-text">Một điểm đến du lịch nổi bật với không gian núi rừng, tuyến cáp treo, và cảnh quan tuyệt đẹp, phù hợp cho những ai muốn trải nghiệm thiên nhiên trong ngày nghỉ cuối tuần.</p>
-              <a href="blank.html" target="_blank" rel="noopener" class="btn btn-danger btn-lg fw-bold">Xem chi tiết</a>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-<!--end tin tức mới nhất-->
 
-<section class="latest-news container-fluid mt-4" aria-labelledby="more-destinations-title">
-  <h2 id="more-destinations-title" class="latest-news-title">Các địa danh khác ở TP.HCM</h2>
-  <div class="row">
-    <div class="col-md-4 mb-4">
-      <article class="card latest-news-card h-100">
-        <img class="card-img-top latest-news-image" src="https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=1200&q=80" alt="Vườn hoa Tao Đàn">
-        <div class="card-body">
-          <div class="article-meta"><span>Công viên</span><time datetime="2026-09-13">13/09/2026</time></div>
-          <h5 class="card-title">Công viên Tao Đàn</h5>
-          <p class="card-text">Địa chỉ: Q.1. Nơi lý tưởng để đi dạo, ngắm cây xanh và thưởng thức không khí thoáng mát giữa trung tâm thành phố.</p>
-          <a href="blank.html" target="_blank" rel="noopener" class="btn btn-danger btn-lg fw-bold">Xem chi tiết</a>
+        <!-- Presentation Bottom Controls -->
+        <div class="flex items-center justify-between border-t border-stone-800 pt-4">
+            <div class="text-xs text-stone-500 hidden sm:block">
+                Dùng phím <kbd class="px-2 py-1 bg-stone-800 rounded border border-stone-700">←</kbd> và <kbd class="px-2 py-1 bg-stone-800 rounded border border-stone-700">→</kbd> để chuyển slide
+            </div>
+            <div class="flex items-center gap-3 ml-auto">
+                <button onclick="prevSlide()" class="px-5 py-3 rounded-xl bg-stone-800 hover:bg-stone-700 text-stone-200 font-bold text-sm transition-all">
+                    <i class="fa-solid fa-chevron-left mr-2"></i> Trước
+                </button>
+                <button onclick="nextSlide()" class="px-6 py-3 rounded-xl bg-heritage-500 hover:bg-heritage-600 text-stone-950 font-bold text-sm transition-all shadow-lg">
+                    Tiếp theo <i class="fa-solid fa-chevron-right ml-2"></i>
+                </button>
+            </div>
         </div>
-      </article>
     </div>
 
-    <div class="col-md-4 mb-4">
-      <article class="card latest-news-card h-100">
-        <img class="card-img-top latest-news-image" src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1200&q=80" alt="Bưu điện Thành phố">
-        <div class="card-body">
-          <div class="article-meta"><span>Kiến trúc cổ</span><time datetime="2026-09-13">13/09/2026</time></div>
-          <h5 class="card-title">Bưu điện Thành phố</h5>
-          <p class="card-text">Địa chỉ: Q.1. Công trình mang phong cách cổ điển, nổi tiếng với kiến trúc đẹp và là điểm chụp ảnh yêu thích của người dân và du khách.</p>
-          <a href="blank.html" target="_blank" rel="noopener" class="btn btn-danger btn-lg fw-bold">Xem chi tiết</a>
+    <footer class="bg-red-950 text-red-50 border-t border-red-800/70">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
+            <div class="flex flex-col sm:flex-row items-center sm:items-start justify-between gap-6">
+                <div class="flex items-center gap-3 text-center sm:text-left">
+                    <div class="w-14 h-14 rounded-full bg-white flex items-center justify-center overflow-hidden shrink-0 shadow-lg">
+                        <!-- CHÈN LOGO TRƯỜNG Ở CHÂN TRANG TẠI ĐÂY: thay ./img.png nếu cần -->
+                        <img src="./img.png" alt="Logo Trường THPT Nguyễn Tri Phương" class="w-full h-full object-contain">
+                    </div>
+                    <div>
+                        <h2 class="font-serif font-bold text-lg text-white">TRƯỜNG THPT NGUYỄN TRI PHƯƠNG</h2>
+                        <p class="text-xs text-red-200 mt-1">Cổng thuyết trình và trắc nghiệm di tích TP. Hồ Chí Minh</p>
+                    </div>
+                </div>
+
+                <button onclick="window.scrollTo({ top: 0, behavior: 'smooth' })" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-red-300/40 text-red-100 hover:bg-red-900 transition-colors text-sm font-semibold">
+                    <i class="fa-solid fa-arrow-up"></i>
+                    Lên đầu trang
+                </button>
+            </div>
+
+            <div class="mt-7 pt-5 border-t border-red-800/70 text-center sm:text-left text-xs text-red-300">
+                © 2026 Trường THPT Nguyễn Tri Phương. Nội dung phục vụ học tập và thuyết trình.
+            </div>
         </div>
-      </article>
-    </div>
+    </footer>
 
-    <div class="col-md-4 mb-4">
-      <article class="card latest-news-card h-100">
-        <img class="card-img-top latest-news-image" src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80" alt="Chùa Ngọc Hoàng">
-        <div class="card-body">
-          <div class="article-meta"><span>Văn hóa tâm linh</span><time datetime="2026-09-13">13/09/2026</time></div>
-          <h5 class="card-title">Chùa Ngọc Hoàng</h5>
-          <p class="card-text">Địa chỉ: Q.5. Là điểm đến linh thiêng, nổi bật với kiến trúc đẹp và không gian yên tĩnh, thích hợp cho những ai muốn tìm sự bình yên.</p>
-          <a href="blank.html" target="_blank" rel="noopener" class="btn btn-danger btn-lg fw-bold">Xem chi tiết</a>
-        </div>
-      </article>
-    </div>
+    <script>
+        const landmarksData = [
+            {
+                id: "dinh-doc-lap",
+                name: "Dinh Độc Lập",
+                subTitle: "Di Tích Quốc Gia Đặc Biệt • Biểu Tượng Lịch Sử & Kiến Trúc",
+                address: "135 Nam Kỳ Khởi Nghĩa, Phường Bến Thành, Quận 1, TP.HCM",
+                hours: "07:30 - 17:00 hàng ngày",
+                // CHÈN ẢNH DINH ĐỘC LẬP TẠI ĐÂY: thay URL trong dấu ngoặc kép.
+                image: "./dinh độc lập.png",
+                mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.4678888497645!2d106.69299497573615!3d10.777732159211025!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752f385570472f%3A0x1787491bf0edeac6!2sIndependence%20Palace!5e0!3m2!1sen!2svn!4v1700000000000!5m2!1sen!2svn",
+                description: "Công trình kiến trúc độc đáo do KTS Ngô Viết Thụ thiết kế, chứng kiến thời khắc lịch sử giải phóng miền Nam thống nhất đất nước ngày 30/04/1975.",
+                subTopics: [
+                    { 
+                        id: 1, 
+                        title: "Phòng Khánh Tiết", 
+                        code: "dl-01", 
+                        location: "Tầng 1 - Khối chính", 
+                        summary: "Nơi diễn ra các lễ nghi trọng đại, lễ ra mắt nội các và đón tiếp ngoại giao cấp nhà nước với sức chứa 500 người.", 
+                        content: "<p class='mb-3'>Phòng Khánh Tiết là không gian trang trọng nhất của Dinh Độc Lập. Được thiết kế với trần cao ráo, hệ thống đèn chùm tinh xảo nhập khẩu từ châu Âu mang sắc vàng ấm áp.</p><ul class='list-disc pl-5 space-y-1 text-stone-300'><li>Sức chứa lên tới 500 người phục vụ các hội nghị lớn.</li><li>Sàn trải thảm đỏ lộng lẫy kéo dài từ cửa chính vào sân khấu.</li><li>Nơi chứng kiến lễ ra mắt nội các chính quyền Việt Nam Cộng Hòa và nhiều sự kiện lịch sử quan trọng.</li></ul>" 
+                    },
+                    { 
+                        id: 2, 
+                        title: "Phòng Đại Yến", 
+                        code: "dl-02", 
+                        location: "Tầng 1 - Cánh trái", 
+                        image: "./phòng đại yến.png",
+                        summary: "Nơi tổ chức các buổi yến tiệc quốc gia tiếp đón các nguyên thủ quốc tế và khách quý.", 
+                        content: "<p class='mb-3'>Phòng Đại Yến nổi bật với bàn tiệc dài bằng gỗ quý dát hoa văn sang trọng, có thể phục vụ hơn 100 khách mời danh dự cùng lúc.</p><p class='mb-3'>Điểm nhấn nghệ thuật lớn nhất trong phòng là bức tranh sơn mài khổ lớn mang tên <strong>'Sơn Hà Cẩm Tú'</strong> do họa sĩ Nguyễn Văn Minh sáng tác, tái hiện vẻ đẹp gấm vóc non sông Việt Nam.</p>" 
+                    },
+                    { 
+                        id: 3, 
+                        title: "Phòng Trình Quốc Thư", 
+                        code: "dl-03", 
+                        location: "Tầng 2 - Khối trung tâm", 
+                        image: "./phòng trình quốc thư.png",
+                        summary: "Nơi Đại sứ các nước trình Quốc thư, chứa tác phẩm sơn mài Bình Ngô Đại Cáo độc bản.", 
+                        content: "<p class='mb-3'>Nơi này dành riêng cho nghi thức ngoại giao ngoại giao đón tiếp các đại sứ quốc tế đến trình quốc thư công tác.</p><ul class='list-disc pl-5 space-y-1 text-stone-300'><li>Bức tranh sơn mài <strong>'Bình Ngô Đại Cáo'</strong> ghép từ 40 mảnh ghép sơn mài truyền thống phản chiếu ánh sáng dát vàng rực rỡ.</li><li>Bàn ghế chạm khắc hoa văn rồng phụng tỉ mỉ kết hợp giữa hiện đại và mỹ thuật cổ truyền.</li></ul>" 
+                    },
+                    { 
+                        id: 4, 
+                        title: "Phòng Hội Đồng Nội Các", 
+                        code: "dl-04", 
+                        location: "Tầng 2 - Cánh phải", 
+                        image: "./phòng nội các.png",
+                        summary: "Bàn họp bầu dục hiện đại nơi các cuộc họp chính phủ diễn ra dưới sự chủ trì của Tổng thống.", 
+                        content: "<p class='mb-3'>Phòng Hội Đồng Nội Các có bàn họp hình bầu dục bọc da cao cấp. Mỗi vị trí ngồi đều được trang bị hệ thống micro và tai nghe phiên dịch đa ngôn ngữ – công nghệ cực kỳ hiện đại vào thập niên 1960.</p><p>Tại bàn họp này, nhiều quyết sách quân sự và chính trị quan trọng trong giai đoạn 1966 - 1975 đã được thảo luận.</p>" 
+                    },
+                    { 
+                        id: 5, 
+                        title: "Phòng Tác Chiến Tầng Hầm", 
+                        code: "dl-05", 
+                        location: "Tầng Hầm - Độ sâu 3m", 
+                        summary: "Sở chỉ huy quân sự thu nhỏ với tường bê tông kiên cố chịu lực nổ bom 500kg.", 
+                        content: "<p class='mb-3'>Hệ thống tầng hầm Dinh Độc Lập là một công trình công sự kiên cố bằng bê tông cốt thép dày, có khả năng chịu được sức nổ của bom hạng nặng 500kg.</p><ul class='list-disc pl-5 space-y-1 text-stone-300'><li><strong>Phòng Bán Kỹ Thuật:</strong> Lưu giữ hàng chục bản đồ quân sự Nam Việt Nam.</li><li><strong>Trung tâm Viễn Thông:</strong> Hệ thống đài vô tuyến, máy thu phát tín hiệu kết nối trực tiếp với các căn cứ quân sự và Washington.</li><li><strong>Phòng Tổng thống trực hầm:</strong> Nơi ở khẩn cấp của Tổng thống trong các tình huống chiến tranh.</li></ul>" 
+                    },
+                    { 
+                        id: 6, 
+                        title: "Xe Tăng 390 & 843", 
+                        code: "dl-06", 
+                        location: "Khuôn viên Sân trước Dinh", 
+                        summary: "Hai chiếc xe tăng huyền thoại húc cổng Dinh trưa ngày 30/4/1975, Bảo vật Quốc gia.", 
+                        content: "<p class='mb-3'>Trưa ngày 30 tháng 4 năm 1975, hai chiếc xe tăng T-54 mang số hiệu 843 (do Trung úy Bùi Quang Thận chỉ huy) và xe tăng T-59 mang số hiệu 390 (do Vũ Đăng Toàn chỉ huy) thuộc Quân đoàn 2 đã húc văng cổng chính Dinh Độc Lập.</p><p>Sự kiện này đánh dấu thời khắc hoàn toàn giải phóng miền Nam, thống nhất đất nước. Cả hai chiếc xe tăng hiện nay đã được công nhận là <strong>Bảo vật Quốc gia Việt Nam</strong>.</p>" 
+                    },
+                    { 
+                        id: 7, 
+                        title: "Sân Thượng & Trực Thăng UH-1", 
+                        code: "dl-07", 
+                        location: "Tầng Sân Thượng", 
+                        summary: "Bãi đáp trực thăng và vị trí thả bom của phi công Nguyễn Thành Trung ngày 8/4/1975.", 
+                        content: "<p class='mb-3'>Sân thượng Dinh Độc Lập được thiết kế làm bãi đáp cho trực thăng chiến đấu UH-1. Trên mặt sàn sân thượng hiện vẫn còn vẽ hai vòng tròn màu đỏ đánh dấu vị trí 2 quả bom mà phi công Nguyễn Thành Trung (ném bom Dinh Độc Lập ngày 8/4/1975) đã thả xuống.</p><p>Ngoài ra, trên sân thượng còn có Lầu Tứ Phương Vô Sự - nơi dành cho gia đình Tổng thống ngắm cảnh và thư giãn.</p>" 
+                    },
+                    { 
+                        id: 8, 
+                        title: "Triết Lý Phong Thủy Chữ Hán", 
+                        code: "dl-08", 
+                        location: "Kiến trúc tổng thể", 
+                        summary: "Mặt bằng Dinh ghép thành các chữ Hán phong thủy: CÁT, KHẨU, TRUNG, TAM, CHỦ.", 
+                        content: "<p class='mb-3'>Kiến trúc sư Ngô Viết Thụ đã vận dụng tài tình triết lý phương Đông vào công trình hiện đại:</p><ul class='list-disc pl-5 space-y-1 text-stone-300'><li><strong>Chữ CÁT (吉):</strong> Toàn bộ mặt bằng Dinh tạo thành chữ Cát mang ý nghĩa may mắn, tốt lành.</li><li><strong>Chữ KHẨU (口):</strong> Tối ưu hóa việc lấy ánh sáng tự nhiên và gió trời thông qua giếng trời center.</li><li><strong>Chữ TRUNG (中):</strong> Cột cờ ở giữa mặt tiền tượng trưng cho sự trung chính.</li><li><strong>Chữ TAM (三):</strong> Ba nét ngang tượng trưng cho Nhân - Minh - Vũ.</li><li><strong>Chữ CHỦ (主):</strong> Khi thêm nét chấm trên chữ Tam tạo thành chữ Chủ, tượng trưng cho chủ quyền quốc gia.</li></ul>" 
+                    }
+                ],
+                quiz: Array.from({ length: 20 }, (_, i) => ({
+                    id: i + 1,
+                    question: [
+                        "KTS nào thiết kế Dinh Độc Lập khánh thành năm 1966?",
+                        "Chiếc xe tăng nào đã húc văng cổng chính Dinh Độc Lập trưa 30/4/1975?",
+                        "Mặt bằng Dinh Độc Lập được KTS thiết kế mô phỏng chữ Hán nào mang ý nghĩa may mắn?",
+                        "Nội các chính quyền Sài Gòn tuyên bố đầu hàng tại đâu?",
+                        "Phòng nào trong Dinh Độc Lập có bức tranh sơn mài 'Bình Ngô Đại Cáo'?",
+                        "Ai là phi công đã ném bom xuống Dinh Độc Lập ngày 8/4/1975?",
+                        "Tầng hầm Dinh Độc Lập có khả năng chịu được sức nổ của loại bom nào?",
+                        "Lá cờ giải phóng được treo trên nóc Dinh Độc Lập vào thời gian nào ngày 30/4/1975?",
+                        "Chiếc xe tăng 843 do ai làm trưởng xe?",
+                        "Dinh Độc Lập nằm tại địa chỉ nào thuộc TP. Hồ Chí Minh?",
+                        "Tên gọi ban đầu của Dinh Độc Lập thời Pháp thuộc là gì?",
+                        "Bức mành hoa trúc ở mặt tiền Dinh Độc Lập làm bằng chất liệu gì?",
+                        "Phòng Khánh Tiết của Dinh Độc Lập có sức chứa khoảng bao nhiêu người?",
+                        "Diện tích khuôn viên cây xanh của Dinh Độc Lập rộng bao nhiêu hécta?",
+                        "Công trình Dinh Độc Lập được khởi công xây dựng lại vào năm nào?",
+                        "Thành phần chữ Hán nào tượng trưng cho tinh thần 'Nhân - Minh - Vũ' trong kiến trúc Dinh?",
+                        "Biểu tượng chiếc máy bay trưng bày ở khuôn viên Dinh thuộc dòng máy bay nào?",
+                        "Trung tâm thông tin tầng hầm từng kết nối trực tiếp tới địa điểm nào?",
+                        "Ai là Tổng thống đầu tiên làm việc tại Dinh Độc Lập mới (sau 1966)?",
+                        "Dinh Độc Lập hiện nay được công nhận xếp hạng di tích gì?"
+                    ][i],
+                    options: [
+                        ["KTS Ngô Viết Thụ", "KTS Huỳnh Tấn Phát", "KTS Lê Văn Tấn", "KTS Nguyễn An"],
+                        ["Xe tăng 390", "Xe tăng 843", "Xe tăng 540", "Xe tăng 980"],
+                        ["Chữ CÁT (吉)", "Chữ PHÚC (福)", "Chữ THỌ (壽)", "Chữ LỘC (祿)"],
+                        ["Phòng Khánh Tiết", "Phòng Hội đồng Nội các", "Đài Truyền thanh", "Sân trước Dinh"],
+                        ["Phòng Trình Quốc Thư", "Phòng Đại Yến", "Phòng Tổng thống", "Phòng Tiếp khách"],
+                        ["Nguyễn Thành Trung", "Phạm Tuân", "Bùi Quang Thận", "Vũ Đăng Toàn"],
+                        ["Bom 500kg", "Bom 100kg", "Bom Hạt nhân", "Bom mìn nhẹ"],
+                        ["11 giờ 30 phút", "10 giờ 45 phút", "08 giờ 00 phút", "12 giờ 00 phút"],
+                        ["Bùi Quang Thận", "Vũ Đăng Toàn", "Lê Văn Phượng", "Nguyen Van Khoi"],
+                        ["135 Nam Kỳ Khởi Nghĩa, Q.1", "12 Lê Duẩn, Q.1", "45 Nguyễn Huệ, Q.1", "100 Đồng Khởi, Q.1"],
+                        ["Dinh Norodom", "Dinh Gia Long", "Dinh Toàn Thống", "Dinh Bến Thành"],
+                        ["Đốt trúc bằng gốm sứ màu trắng", "Thanh đồng mạ vàng", "Gỗ gụ sơn mài", "Sắt đúc hoa văn"],
+                        ["500 người", "100 người", "1000 người", "200 người"],
+                        ["12 Hécta", "5 Hécta", "20 Hécta", "2 Hécta"],
+                        ["Năm 1962", "Năm 1970", "Năm 1954", "Năm 1975"],
+                        ["Chữ TAM (三)", "Chữ KHẨU (口)", "Chữ TRUNG (中)", "Chữ CHỦ (主)"],
+                        ["F-5E", "MIG-21", "A-37", "C-130"],
+                        ["Bộ Tổng Tham Mưu & Các Vùng Chiến Thuật", "Nhà Trắng", "Lầu Năm Góc", "Đại sứ quán"],
+                        ["Nguyễn Văn Thiệu", "Ngô Đình Diệm", "Dương Văn Minh", "Nguyễn Cao Kỳ"],
+                        ["Di tích Quốc gia Đặc biệt", "Di tích Cấp Thành phố", "Di sản Thế giới", "Danh thắng Cấp tỉnh"]
+                    ][i],
+                    answer: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0][i],
+                    explain: `Đáp án chi tiết cho câu hỏi ${i + 1} về Dinh Độc Lập dựa trên tài liệu lịch sử và kiến trúc di tích chính thức.`
+                }))
+            },
+            {
+                id: "nha-tho-duc-ba",
+                name: "Nhà Thờ Đức Bà Sài Gòn",
+                subTitle: "Vương Cung Thánh Đường Đức Bà • Tuyệt Tác Kiến Trúc Roman & Gothic",
+                address: "Số 1 Công xã Paris, Phường Bến Nghé, Quận 1, TP.HCM",
+                hours: "Tham quan bên ngoài & Giờ hành lễ",
+                // CHÈN ẢNH NHÀ THỜ ĐỨC BÀ TẠI ĐÂY.
+                image: "./nhà thờ đức bà.png",
+                mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.4478888497645!2d106.69899497573615!3d10.779732159211025!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752f385570472f%3A0x1787491bf0edeac6!2sNotre-Dame%20Cathedral%20Basilica!5e0!3m2!1sen!2svn!4v1700000000000!5m2!1sen!2svn",
+                description: "Kiệt tác kiến trúc thánh đường Công giáo Pháp xây dựng từ năm 1877 với gạch nung Toulouse đỏ gạch và hai tháp chuông cao 60.5m tuyệt đẹp.",
+                subTopics: [
+                    { 
+                        id: 1, 
+                        title: "Hai Tháp Chuông Cao 60.5m", 
+                        code: "db-01", 
+                        location: "Mặt đứng chính", 
+                        summary: "Điểm nhấn chiều cao ấn tượng với 6 quả chuông đồng đúc tại Pháp năm 1879.", 
+                        content: "<p class='mb-3'>Tháp chuông Nhà thờ Đức Bà ban đầu cao 36.6m. Đến năm 1895, hai mái nhọn bằng thép cao 21m được lắp thêm, nâng tổng chiều cao lên 60.5m.</p><p class='mb-3'>Bên trong 2 tháp chứa bộ chuông gồm 6 quả chuông lớn đúc tại Pháp năm 1879 tương ứng với các nốt nhạc: Sol, La, Si, Do, Re, Mi, tổng trọng lượng bộ chuông xấp xỉ 30 tấn.</p>" 
+                    },
+                    { 
+                        id: 2, 
+                        title: "Gạch Nung Trần Toulouse", 
+                        code: "db-02", 
+                        location: "Toàn bộ tường ngoài", 
+                        summary: "Loại gạch đặc biệt nhập từ Toulouse (Pháp) giữ nguyên sắc đỏ tươi không bám rêu mốc.", 
+                        content: "<p class='mb-3'>Toàn bộ gạch xây tường bên ngoài nhà thờ được đặt hàng đúc riêng tại thành phố Toulouse (Pháp). Gạch để trần, không hề tô trát vữa nhưng trải qua hơn 140 năm thời tiết nhiệt đới vẫn giữ nguyên sắc đỏ da cam tươi tắn, không bị bám rêu mốc hay hư hỏng.</p>" 
+                    },
+                    { 
+                        id: 3, 
+                        title: "Tượng Đức Mẹ Hòa Bình", 
+                        code: "db-03", 
+                        location: "Công viên trước thánh đường", 
+                        summary: "Pho tượng bằng đá cẩm thạch trắng Carrara tạc tại Italy năm 1959.", 
+                        content: "<p class='mb-3'>Tượng Đức Mẹ Hòa Bình được tạc nguyên khối bằng đá cẩm thạch trắng Carrara (Ý) do nhà tạc tượng G. Ciocchetti thực hiện năm 1959. Tượng cao 4.6m, nặng 5.8 tấn.</p><p>Tay Đức Mẹ nâng quả địa cầu có gắn thánh giá, ánh mắt nhìn lên trời cầu nguyện hòa bình cho đất nước Việt Nam.</p>" 
+                    },
+                    { 
+                        id: 4, 
+                        title: "Hệ Thống Kính Màu Ghép Art", 
+                        code: "db-04", 
+                        location: "Các ô cửa vòm vòng quanh", 
+                        summary: "Những bức tranh kính màu lung linh phản chiếu ánh sáng tự nhiên rực rỡ.", 
+                        content: "<p class='mb-3'>Nhà thờ sở hữu 56 ô cửa kính màu huyền ảo do hãng chế tác Lorin ở Chartres (Pháp) sản xuất thủ công.</p><p>Các bức tranh kính tái hiện hình ảnh các nhân vật Kinh Thánh, các sự tích Công giáo và hoa văn Gothic cổ điển, tạo nên hiệu ứng ánh sáng thần tiên bên trong lòng thánh đường khi ánh nắng chiếu qua.</p>" 
+                    },
+                    { 
+                        id: 5, 
+                        title: "Chiếc Đồng Hồ Cổ 1887", 
+                        code: "db-05", 
+                        location: "Khối giữa hai tháp chuông", 
+                        summary: "Bộ máy đồng hồ cơ học cổ xưa chế tạo tại Pháp năm 1887 vẫn hoạt động chính xác.", 
+                        content: "<p class='mb-3'>Nằm ngay dưới ô cửa sổ tròn ở mặt chính diện là chiếc đồng hồ cổ được chế tác bởi hãng RAU tại Pháp vào năm 1887. Mặc dù bộ máy cơ học đã có tuổi đời hơn 130 năm và nặng hơn 1 tấn, chiếc đồng hồ vẫn chạy rất chính xác.</p>" 
+                    },
+                    { 
+                        id: 6, 
+                        title: "Bàn Thờ Đá Cẩm Thạch & Không Gian Thánh Đường", 
+                        code: "db-06", 
+                        location: "Lòng nhà chính (Nave)", 
+                        summary: "Sức chứa 1.200 người với bàn thờ chính tạc từ đá cẩm thạch nguyên khối.", 
+                        content: "<p class='mb-3'>Không gian bên trong nhà thờ được thiết kế với hai hàng cột vòm Roman kết hợp Gothic cao vút, tạo hiệu ứng vòm vang âm thanh tuyệt hảo. Bàn thờ chính được chế tác từ đá cẩm thạch nguyên khối chạm khắc tỉ mỉ hình các thiên thần.</p>" 
+                    }
+                ],
+                quiz: Array.from({ length: 20 }, (_, i) => ({
+                    id: i + 1,
+                    question: [
+                        "Nhà thờ Đức Bà Sài Gòn được khởi công xây dựng vào năm nào?",
+                        "Kiến trúc sư người Pháp nào là tác giả thiết kế Nhà thờ Đức Bà Sài Gòn?",
+                        "Gạch nung xây tường Nhà thờ Đức Bà được vận chuyển từ thành phố nào của Pháp?",
+                        "Hai tháp chuông của Nhà thờ Đức Bà có chiều cao khoảng bao nhiêu mét?",
+                        "Tượng Đức Mẹ Hòa Bình trước nhà thờ được làm bằng chất liệu gì?",
+                        "Tượng Đức Mẹ Hòa Bình được tạc tại quốc gia nào vào năm 1959?",
+                        "Bộ chuông trong tháp chuông Nhà thờ Đức Bà gồm bao nhiêu quả chuông?",
+                        "Nhà thờ Đức Bà Sài Gòn chính thức được phong hàng Vương Cung Thánh Đường vào năm nào?",
+                        "Phong cách kiến trúc chủ đạo của Nhà thờ Đức Bà Sài Gòn là gì?",
+                        "Mặt tiền Nhà thờ Đức Bà hướng ra quảng trường/con đường nào?",
+                        "Toàn bộ vật liệu xây dựng Nhà thờ Đức Bà thời kỳ đầu có đặc điểm gì?",
+                        "Mái nhọn thép trên hai tháp chuông được lắp đặt thêm vào năm nào?",
+                        "Tổng trọng lượng của 6 quả chuông đồng trong tháp chuông là bao nhiêu?",
+                        "Khác với các công trình khác, tường ngoài Nhà thờ Đức Bà có điểm gì đặc biệt?",
+                        "Chiếc đồng hồ cổ lớn ở mặt tiền nhà thờ được chế tác tại đâu?",
+                        "Hệ thống kính màu trang trí thánh đường do hãng nào của Pháp sản xuất?",
+                        "Số lượng thánh đường được phong Vương cung thánh đường tại Việt Nam rất ít, đúng hay sai?",
+                        "Tên gọi chính thức của Nhà thờ Đức Bà Sài Gòn là gì?",
+                        "Cột mốc khoảng cách giao thông đường bộ Sài Gòn từng lấy điểm mốc từ đâu?",
+                        "Nhà thờ Đức Bà tọa lạc tại quận nào của TP.HCM?"
+                    ][i],
+                    options: [
+                        ["Năm 1877", "Năm 1900", "Năm 1850", "Năm 1920"],
+                        ["J.Bourard", "Ngô Viết Thụ", "Gustave Eiffel", "Alexandre Yersin"],
+                        ["Toulouse", "Paris", "Marseille", "Lyon"],
+                        ["60.5 mét", "40 mét", "80 mét", "100 mét"],
+                        ["Đá cẩm thạch trắng Carrara", "Đồng thau", "Bê tông", "Gỗ tấu"],
+                        ["Italy (Ý)", "Pháp", "Đức", "Tây Ban Nha"],
+                        ["6 quả chuông", "2 quả", "12 quả", "4 quả"],
+                        ["Năm 1959", "Năm 1975", "Năm 2000", "Năm 1930"],
+                        ["Kiến trúc Roman kết hợp Gothic", "Kiến trúc Baroc", "Kiến trúc Hiện đại", "Kiến trúc Á Đông"],
+                        ["Công xã Paris", "Lê Duẩn", "Nguyen Hue", "Đồng Khởi"],
+                        ["Đều được nhập khẩu trực tiếp từ Pháp", "Sử dụng gạch đá tại địa phương", "Nhập từ Nhật Bản", "Nhập từ Ấn Độ"],
+                        ["Năm 1895", "Năm 1910", "Năm 1950", "Năm 1877"],
+                        ["Khoảng 30 tấn", "5 tấn", "50 tấn", "10 tấn"],
+                        ["Không tô trát vữa nhưng không rêu mốc", "Được phủ sơn đỏ hàng năm", "Được ốp đá hoa cương", "Lát gỗ hoàn toàn"],
+                        ["Pháp", "Thụy Sĩ", "Đức", "Anh"],
+                        ["Hãng Lorin (Chartres)", "Hãng Peugeot", "Hãng Michelin", "Hãng Eiffel"],
+                        ["Đúng", "Sai", "Chưa xác định", "Không có thông tin"],
+                        ["Vương Cung Thánh Đường Chính Tòa Đức Mẹ Vô Nhiễm Nguyên Tội", "Thánh đường Sài Gòn", "Giáo xứ Bến Nghé", "Nhà thờ Tân Định"],
+                        ["Trước mặt Nhà thờ Đức Bà", "Chợ Bến Thành", "Dinh Độc Lập", "Bưu điện"],
+                        ["Quận 1", "Quận 3", "Quận 5", "Bình Thạnh"]
+                    ][i],
+                    answer: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0][i],
+                    explain: `Giải thích kiến thức chi tiết câu ${i + 1} về Nhà thờ Đức Bà Sài Gòn.`
+                }))
+            },
+            {
+                id: "cho-ben-thanh",
+                name: "Chợ Bến Thành",
+                subTitle: "Biểu Tượng Thương Mại & Văn Hóa Lâu Đời Của Sài Gòn",
+                address: "Đường Lê Lợi, Phường Bến Thành, Quận 1, TP.HCM",
+                hours: "06:00 - 22:00 hàng ngày",
+                // CHÈN ẢNH CHỢ BẾN THÀNH TẠI ĐÂY.
+                image: "./chợ bến thành.png",
+                mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.4878888497645!2d106.69699497573615!3d10.772732159211025!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752f385570472f%3A0x1787491bf0edeac6!2sBen%20Thanh%20Market!5e0!3m2!1sen!2svn!4v1700000000000!5m2!1sen!2svn",
+                description: "Ngôi chợ biểu tượng hình thành từ đầu thế kỷ 20 với tháp đồng hồ 4 mặt nổi tiếng, điểm giao thoa ẩm thực và hàng hóa sầm uất.",
+                subTopics: [
+                    { 
+                        id: 1, 
+                        title: "Tháp Đồng Hồ 4 Mặt Cửa Nam", 
+                        code: "bt-01", 
+                        location: "Cửa Nam chính diện", 
+                        summary: "Hình ảnh biểu tượng quen thuộc xuất hiện trên vô số logo và thiệp du lịch Sài Gòn.", 
+                        content: "<p class='mb-3'>Tháp đồng hồ phía Cửa Nam là hình ảnh đại diện nổi tiếng nhất của Chợ Bến Thành. Tháp được xây dựng kiến trúc 3 tầng nhô cao, trang trí mặt đồng hồ tròn hướng ra 4 phía.</p><p>Phía dưới tháp đồng hồ là nơi thờ ngai Thành hoàng theo tín ngưỡng dân gian của các tiểu thương buôn bán trong chợ.</p>" 
+                    },
+                    { 
+                        id: 2, 
+                        title: "4 Cửa Chính & 12 Cửa Phụ", 
+                        code: "bt-02", 
+                        location: "4 Phía Đông - Tây - Nam - Bắc", 
+                        summary: "Mỗi cửa chính giáp các con đường sầm uất và kinh doanh nhóm mặt hàng riêng biệt.", 
+                        content: "<ul class='list-disc pl-5 space-y-2 text-stone-300'><li><strong>Cửa Nam (Đường Lê Lợi):</strong> Chuyên bán vải vóc, quần áo, thực phẩm khô.</li><li><strong>Cửa Bắc (Đường Lê Thánh Tôn):</strong> Chuyên các loại hoa tươi, trái cây tươi ngon.</li><li><strong>Cửa Đông (Đường Phan Bội Châu):</strong> Thiên đường bánh kẹo, mỹ phẩm.</li><li><strong>Cửa Tây (Đường Phan Chu Trinh):</strong> Chuyên kinh doanh quà lưu niệm, đồ mỹ nghệ, giày dép.</li></ul>" 
+                    },
+                    { 
+                        id: 3, 
+                        title: "Kiến Trúc Mái Vòm Thông Gió", 
+                        code: "bt-03", 
+                        location: "Khung mái chợ", 
+                        summary: "Thiết kế mái nhà xếp lớp lấy ánh sáng và gió tự nhiên giúp không gian luôn thoáng mát.", 
+                        content: "<p class='mb-3'>Được thi công bởi hãng Brossard et Mopin từ năm 1912-1914, chợ Bến Thành sử dụng hệ khung gạt thép vòm lớn cùng kết cấu mái hai tầng lợp ngói. Kiểu thiết kế này cho phép luồng không khí nhiệt đới lưu thông liên tục, giữ cho lòng chợ luôn mát mẻ.</p>" 
+                    },
+                    { 
+                        id: 4, 
+                        title: "Thiên Đường Ẩm Thực Đêm & Ngày", 
+                        code: "bt-04", 
+                        location: "Khu vực trung tâm chợ", 
+                        summary: "Hội tụ hàng trăm món ăn đặc sản miền Nam: chè Sài Gòn, bún mắm, gỏi cuốn.", 
+                        content: "<p class='mb-3'>Khu ẩm thực Chợ Bến Thành là nơi giữ chân du khách với sự phong phú của các món ăn truyền thống Nam Bộ: bún mắm, bún riêu, bánh xèo, gỏi cuốn và gian hàng chè ngọt rực rỡ sắc màu.</p>" 
+                    },
+                    { 
+                        id: 5, 
+                        title: "Lịch Sử Lâu Đời Từ Bến Sông", 
+                        code: "bt-05", 
+                        location: "Lịch sử công trình", 
+                        summary: "Nguồn gốc tên gọi Bến Thành bắt đầu từ bến sông gần thành Quy thời nhà Nguyễn.", 
+                        content: "<p class='mb-3'>Ban đầu, chợ nằm ở ven sông Bến Nghé, gần một bến đò phục vụ khách ra vào thành Quy (thành Gia Định). Do đó người dân gọi tên là 'Chợ Bến Thành'. Năm 1912, chính quyền thời đó quyết định dời chợ về vị trí đầm bồ đề cũ – chính là vị trí hiện nay.</p>" 
+                    },
+                    { 
+                        id: 6, 
+                        title: "Trung Tâm Kết Nối Metro Số 1", 
+                        code: "bt-06", 
+                        location: "Quảng trường trước Cửa Nam", 
+                        summary: "Nhà ga ngầm Bến Thành thuộc tuyến Metro số 1 Bến Thành - Suối Tiên.", 
+                        content: "<p class='mb-3'>Hiện nay, khu vực trước Cửa Nam Chợ Bến Thành đã được chỉnh trang thành quảng trường đi bộ hiện đại, kết nối trực tiếp với Nhà ga ngầm Bến Thành – trung tâm trung chuyển lớn nhất của hệ thống đường sắt đô thị TP.HCM.</p>" 
+                    }
+                ],
+                quiz: Array.from({ length: 20 }, (_, i) => ({
+                    id: i + 1,
+                    question: [
+                        "Chợ Bến Thành mới tại vị trí hiện nay được khởi công xây dựng vào năm nào?",
+                        "Hình ảnh biểu tượng nổi tiếng nhất trên tháp cổng phía Nam Chợ Bến Thành là gì?",
+                        "Chợ Bến Thành có mấy cửa chính hướng ra các mặt đường lớn?",
+                        "Cửa Nam Chợ Bến Thành nhìn ra con đường/quảng trường nào?",
+                        "Tên gọi 'Bến Thành' ban đầu có nguồn gốc từ đâu?",
+                        "Chợ Bến Thành là trung tâm buôn bán chuyên kinh doanh mặt hàng gì?",
+                        "Nhà thầu xây dựng Pháp nào đã thi công ngôi chợ Bến Thành năm 1912-1914?",
+                        "Cửa Bắc Chợ Bến Thành giáp với con đường nào?",
+                        "Cửa Đông Chợ Bến Thành giáp với con đường nào?",
+                        "Cửa Tây Chợ Bến Thành giáp với con đường nào?",
+                        "Biểu tượng chạm khắc hình con vật gì xuất hiện ở các cổng chợ Bến Thành?",
+                        "Chợ Bến Thành có diện tích tổng cộng khoảng bao nhiêu mét vuông?",
+                        "Khu vực ẩm thực Chợ Bến Thành nổi tiếng với món ăn đặc trưng nào?",
+                        "Trước khi xây chợ mới năm 1912, chợ Bến Thành cũ nằm ở ven sông nào?",
+                        "Chợ Bến Thành hoạt động vào khung giờ nào?",
+                        "Chợ Bến Thành nằm ở Quận mấy của TP.HCM?",
+                        "Đồng hồ tháp Cửa Nam chợ Bến Thành có mấy mặt?",
+                        "Chợ Bến Thành từng trải qua đợt đại trùng tu lớn vào năm nào?",
+                        "Giao thông trước Cửa Nam chợ Bến Thành hiện nay kết nối với nhà ga tuyến Metro số mấy?",
+                        "Chợ Bến Thành là di tích/thắng cảnh có ý nghĩa như thế nào đối với TP.HCM?"
+                    ][i],
+                    options: [
+                        ["Năm 1912", "Năm 1950", "Năm 1800", "Năm 1975"],
+                        ["Tháp đồng hồ 3 tầng", "Tượng đài ngẫu hứng", "Cột cờ lớn", "Đèn chùm mạ vàng"],
+                        ["4 cửa chính (Đông, Tây, Nam, Bắc)", "2 cửa", "8 cửa", "6 cửa"],
+                        ["Đường Lê Lợi & Quảng trường Quách Thị Trang", "Đường Nguyễn Huệ", "Đường Đồng Khởi", "Đường Cách Mạng Tháng 8"],
+                        ["Bến sông gần thành Quy (Thành Bát Quái)", "Bến xe thành phố", "Thành phố Bến Tre", "Bến cảng Nhà Rồng"],
+                        ["Đa dạng từ ẩm thực, vải vóc đến đồ lưu niệm", "Chỉ bán đồ điện tử", "Chỉ bán nông sản tươi", "Chỉ bán sách"],
+                        ["Hãng Brossard et Mopin", "Hãng Eiffel", "Hãng Michelin", "Hãng Renault"],
+                        ["Đường Lê Thánh Tôn", "Đường Lê Lợi", "Đường Phan Bội Châu", "Đường Phan Chu Trinh"],
+                        ["Đường Phan Bội Châu", "Đường Phan Chu Trinh", "Đường Lê Lợi", "Đường Hàm Nghi"],
+                        ["Đường Phan Chu Trinh", "Đường Phan Bội Châu", "Đường Nguyễn Thái Học", "Đường Nam Kỳ Khởi Nghĩa"],
+                        ["Hình đầu bò và đồ sứ chim phụng", "Hình rồng", "Hình sư tử", "Hình hổ"],
+                        ["Khoảng 13.000 m2", "1.000 m2", "50.000 m2", "5.000 m2"],
+                        ["Chè Sài Gòn, bún mắm, bánh xèo", "Phở Hà Nội", "Bún chả", "Mì quảng"],
+                        ["Sông Bến Nghé", "Sông Đồng Nai", "Sông Thị Tính", "Sông Sài Gòn đoạn Củ Chi"],
+                        ["Cả ngày lẫn đêm", "Chỉ bán buổi sáng", "Chỉ bán buổi tối", "Chỉ mở cuối tuần"],
+                        ["Quận 1", "Quận 5", "Quận 10", "Tân Bình"],
+                        ["4 mặt", "2 mặt", "1 mặt", "3 mặt"],
+                        ["Năm 1985", "Năm 2020", "Năm 1960", "Năm 1945"],
+                        ["Tuyến Metro Số 1 (Bến Thành - Suối Tiên)", "Tuyến Metro Số 2", "Tuyến Metro Số 3", "Tuyến Metro Số 5"],
+                        ["Biểu tượng văn hóa thương mại đặc trưng lâu đời", "Trung tâm hành chính", "Khu quân sự", "Cảng biển"]
+                    ][i],
+                    answer: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0][i],
+                    explain: `Đáp án chi tiết câu ${i + 1} về Chợ Bến Thành.`
+                }))
+            },
+            {
+                id: "buu-dien-trung-tam",
+                name: "Bưu Điện Trung Tâm Sài Gòn",
+                subTitle: "Tuyệt Tác Kiến Trúc Phục Hưng & Gothic Thời Pháp Thuộc",
+                address: "Số 2 Công xã Paris, Phường Bến Nghé, Quận 1, TP.HCM",
+                hours: "07:30 - 18:00 hàng ngày",
+                // CHÈN ẢNH BƯU ĐIỆN TRUNG TÂM TẠI ĐÂY.
+                image: "./bưu điện trung tâm sài gòn.png",
+                mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.4478888497645!2d106.69999497573615!3d10.779732159211025!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752f385570472f%3A0x1787491bf0edeac6!2sCentral%20Post%20Office!5e0!3m2!1sen!2svn!4v1700000000000!5m2!1sen!2svn",
+                description: "Tòa nhà bưu điện cổ kính xây dựng từ năm 1886-1891, nổi bật với mái vòm cong hoành tráng, các ô hàng quạt và bản đồ cổ lịch sử.",
+                subTopics: [
+                    { 
+                        id: 1, 
+                        title: "Mái Vòm Sắt Uốn Cong Hoành Tráng", 
+                        code: "bd-01", 
+                        location: "Lòng nhà chính (Sảnh trung tâm)", 
+                        summary: "Hệ thống vòm thép chịu lực do xưởng thiết kế của KTS Gustave Eiffel thi công.", 
+                        content: "<p class='mb-3'>Không gian sảnh chính bưu điện nổi tiếng với mái vòm bán nguyệt vút cao được nâng đỡ bởi hai hàng cột sắt uốn cong tinh xảo. Cấu trúc mái vòm này gợi liên tưởng đến các nhà ga xe lửa cổ điển hoành tráng tại châu Âu thế kỷ 19.</p>" 
+                    },
+                    { 
+                        id: 2, 
+                        title: "Hai Bức Bản Đồ Lịch Sử Cổ", 
+                        code: "bd-02", 
+                        location: "Hai bên tường sảnh vào", 
+                        summary: "Bản đồ Saigon et ses environs (1892) và Lignes télégraphiques (1936).", 
+                        content: "<p class='mb-3'>Hai bức bản đồ lịch sử được vẽ tay trực tiếp lên tường hai bên sảnh vào:</p><ul class='list-disc pl-5 space-y-1 text-stone-300'><li><strong>Bên trái:</strong> <i>Saigon et ses environs 1892</i> (Bản đồ Sài Gòn và vùng phụ cận năm 1892).</li><li><strong>Bên phải:</strong> <i>Lignes télégraphiques du Sud Vietnam et du Cambodge 1936</i> (Mạng lưới đường dây điện báo Nam Kỳ và Campuchia năm 1936).</li></ul>" 
+                    },
+                    { 
+                        id: 3, 
+                        title: "Bốt Điện Thoại Gỗ Cổ Kính", 
+                        code: "bd-03", 
+                        location: "Dọc hai bên sảnh chính", 
+                        summary: "Những bốt điện thoại cabin gỗ cổ hoài niệm giữ nguyên trạng từ thời Pháp thuộc.", 
+                        content: "<p class='mb-3'>Dọc theo sảnh chính là hai hàng cabin điện thoại bằng gỗ màu nâu bóng cổ kính. Mặc dù ngày nay điện thoại di động đã phổ biến, các bốt điện thoại này vẫn được lưu giữ cẩn thận như một điểm chụp ảnh hoài niệm được du khách rất yêu thích.</p>" 
+                    },
+                    { 
+                        id: 4, 
+                        title: "Phù Điêu Tên Các Nhà Khoa Học", 
+                        code: "bd-04", 
+                        location: "Mặt tiền công trình", 
+                        summary: "Khắc tên những danh nhân khoa học vật lý và điện từ nổi tiếng thế giới.", 
+                        content: "<p class='mb-3'>Trên các ô vòm cửa sổ mặt tiền bưu điện có khắc tên của nhiều nhà khoa học vĩ đại đóng góp cho ngành điện từ và viễn thông như: <i>Ampère, Volta, Galvani, Morse, Ohm, Faraday, Franklin...</i></p>" 
+                    },
+                    { 
+                        id: 5, 
+                        title: "Chân Dung Chủ Tịch Hồ Chí Minh", 
+                        code: "bd-05", 
+                        location: "Chính diện sảnh trung tâm", 
+                        summary: "Bức tranh ghép gốm sứ chân dung Bác Hồ treo trang trọng ở vị trí cao nhất.", 
+                        content: "<p class='mb-3'>Ở vị trí trung tâm cao nhất của sảnh bưu điện là bức tranh ghép gốm nghệ thuật tái hiện chân dung Chủ tịch Hồ Chí Minh đang mỉm cười thanh thản, tạo nét ấm cúng và gần gũi cho không gian kiến trúc di sản.</p>" 
+                    },
+                    { 
+                        id: 6, 
+                        title: "Dịch Vụ Bưu Chính Đang Hoạt Động", 
+                        code: "bd-06", 
+                        location: "Các quầy giao dịch", 
+                        summary: "Sự kết hợp hoàn hảo giữa điểm tham quan di sản và dịch vụ bưu chính sống động.", 
+                        content: "<p class='mb-3'>Không giống như các di tích chỉ đóng vai trò bảo tàng, Bưu điện Trung tâm Sài Gòn vẫn đang vận hành hàng ngày phục vụ nhu cầu gửi thư từ, bưu phẩm, đổi ngoại tệ và bán tem cổ cho khách du lịch trong và ngoài nước.</p>" 
+                    }
+                ],
+                quiz: Array.from({ length: 20 }, (_, i) => ({
+                    id: i + 1,
+                    question: [
+                        "Bưu điện Trung tâm Sài Gòn được xây dựng trong khoảng thời gian nào?",
+                        "Kiến trúc sư nổi tiếng nào thiết kế phần khung sắt mái vòm của Bưu điện?",
+                        "Mái vòm bên trong Bưu điện Trung tâm Sài Gòn gợi nhớ đến mô hình kiến trúc nào ở Châu Âu?",
+                        "Hai bức bản đồ cổ vẽ trên tường sảnh Bưu điện thể hiện nội dung gì?",
+                        "Bưu điện Trung tâm Sài Gòn nằm đối diện với danh thắng nào?",
+                        "Mặt tiền Bưu điện trang trí tên của nhiều nhà khoa học nổi tiếng, đúng hay sai?",
+                        "Hình ảnh vị lãnh tụ nào được treo trang trọng ở vị trí trung tâm sảnh Bưu điện?",
+                        "Điểm đặc sắc của các bốt điện thoại cổ bên trong Bưu điện là gì?",
+                        "Bưu điện Trung tâm Sài Gòn mang sự kết hợp giữa phong cách kiến trúc nào?",
+                        "Hàng quạt cửa sổ trên mặt tiền Bưu điện có dạng vòm hình gì?",
+                        "Đồng hồ lớn nằm ở chính giữa phía trên cổng vào Bưu điện có điểm gì nổi bật?",
+                        "Hiện nay Bưu điện Trung tâm Sài Gòn có còn hoạt động bưu chính không?",
+                        "Bưu điện Trung tâm Sài Gòn thuộc sở hữu quản lý của đơn vị nào?",
+                        "Màu sơn đặc trưng bên ngoài Bưu điện Trung tâm Sài Gòn là màu gì?",
+                        "Du khách đến Bưu điện Trung tâm Sài Gòn thường mua món quà lưu niệm nào?",
+                        "Cột sắt đỡ mái vòm trong bưu điện được sơn màu gì?",
+                        "Bưu điện Trung tâm Sài Gòn tọa lạc tại đường nào?",
+                        "Bưu điện Trung tâm Sài Gòn có vị trí cách Dinh Độc Lập khoảng bao xa?",
+                        "Công trình Bưu điện được công nhận là điểm tham quan tiêu biểu của TP.HCM đúng hay sai?",
+                        "Bưu điện Trung tâm Sài Gòn đã có tuổi đời hơn bao nhiêu năm?"
+                    ][i],
+                    options: [
+                        ["1886 - 1891", "1950 - 1955", "1900 - 1905", "1800 - 1805"],
+                        ["Gustave Eiffel", "Ngô Viết Thụ", "J.Bourard", "Le Corbusier"],
+                        ["Nhà ga xe lửa Châu Âu thế kỷ 19", "Cung điện Versailles", "Lâu đài cổ", "Thánh đường Gothic"],
+                        ["Bản đồ địa lý và mạng lưới điện báo Nam Kỳ xưa", "Bản đồ thế giới", "Bản đồ tuyến xe buýt", "Bản đồ du lịch"],
+                        ["Nhà thờ Đức Bà Sài Gòn", "Chợ Bến Thành", "Dinh Độc Lập", "Bảo tàng Lịch sử"],
+                        ["Đúng", "Sai", "Chỉ có nhà văn", "Không có tên ai"],
+                        ["Chủ tịch Hồ Chí Minh", "Vua Gia Long", "KTS Eiffel", "Tổng thống Pháp"],
+                        ["Thiết kế hình cabin gỗ cổ kính lưu giữ hoài niệm", "Làm bằng kính cường lực", "Làm bằng nhựa", "Đã bị tháo dỡ hoàn toàn"],
+                        ["Kiến trúc Phục Hưng kết hợp Gothic & Tây Phương", "Kiến trúc Chăm Pa", "Kiến trúc Hiện đại glass", "Kiến trúc Nhật Bản"],
+                        ["Hình vòm uốn cong trang nhã", "Hình vuông phẳng", "Hình tam giác nhọn", "Hình tròn kín"],
+                        ["Thiết kế cổ điển chạm khắc tinh xảo", "Đồng hồ điện tử LED", "Không có đồng hồ", "Đồng hồ cát"],
+                        ["Vẫn hoạt động dịch vụ bưu chính song song tham quan", "Đã ngừng hoàn toàn", "Chỉ làm bảo tàng", "Chuyển thành trung tâm thương mại"],
+                        ["Tập đoàn Bưu chính Viễn thông Việt Nam (VNPT/VNPost)", "Bộ Quốc Phòng", "UBND Quận 1", "Tư nhân"],
+                        ["Màu vàng nhạt (màu vàng hoàng yến cổ điển)", "Màu xanh lá", "Màu xám đá", "Màu trắng tinh"],
+                        ["Bưu thiếp, tem cổ và đồ thủ công mỹ nghệ", "Quần áo thời trang", "Đồ điện tử", "Thức ăn nhanh"],
+                        ["Màu xanh lá cây/màu đồng cổ", "Màu đỏ tươi", "Màu hồng", "Màu cam"],
+                        ["Số 2 Công xã Paris", "Đồng Khởi", "Lê Lợi", "Ham Nghi"],
+                        ["Khoảng 500 mét", "5 km", "10 km", "20 km"],
+                        ["Đúng", "Sai", "Không chắc chắn", "Chưa xếp hạng"],
+                        ["Hơn 130 năm", "50 năm", "200 năm", "80 năm"]
+                    ][i],
+                    answer: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0][i],
+                    explain: `Đáp án chi tiết câu hỏi ${i + 1} về Bưu điện Trung tâm Sài Gòn.`
+                }))
+            },
+            {
+                id: "dia-dao-cu-chi",
+                name: "Địa Đạo Củ Chi",
+                subTitle: "Mê Cung Trong Lòng Đất • Mạng Lưới Kháng Chiến Kỳ Diệu",
+                address: "Phú Hiệp, Xã Phú Mỹ Hưng, Huyện Củ Chi, TP.HCM",
+                hours: "07:00 - 17:00 hàng ngày",
+                // CHÈN ẢNH ĐỊA ĐẠO CỦ CHI TẠI ĐÂY.
+                image: "./địa đạo củ chi.png",
+                mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3916.4878888497645!2d106.46299497573615!3d11.052732159211025!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3174d4385570472f%3A0x1787491bf0edeac6!2sCu%20Chi%20Tunnels!5e0!3m2!1sen!2svn!4v1700000000000!5m2!1sen!2svn",
+                description: "Hệ thống phòng thủ trong lòng đất dài hơn 200km với đường hầm, bếp Hoàng Cầm, phòng y tế, công xưởng chế tạo vũ khí ngoạn mục.",
+                subTopics: [
+                    { 
+                        id: 1, 
+                        title: "Hệ Thống Đường Hầm 3 Tầng Dưới Đất", 
+                        code: "cc-01", 
+                        location: "Lòng đất Củ Chi", 
+                        summary: "Tầng 1 sâu 3m, tầng 2 sâu 6m, tầng 3 sâu đến 12m cực kỳ kiên cố.", 
+                        content: "<p class='mb-3'>Đường hầm Củ Chi được đào hoàn toàn bằng sức người với công cụ thô sơ là lưỡi cuốc ngắn và thúng tre. Đất sét pha đá đá ong ở Củ Chi càng đi sâu càng khô cứng, giúp hệ thống chịu được đạn pháo hạng nặng.</p><ul class='list-disc pl-5 space-y-1 text-stone-300'><li><strong>Tầng 1 (sâu 3m):</strong> Chịu được đạn pháo và trọng lượng xe tăng nhẹ.</li><li><strong>Tầng 2 (sâu 6m):</strong> Chống bom nhỏ.</li><li><strong>Tầng 3 (sâu 10-12m):</strong> Tầng an toàn nhất tránh bom hạng nặng.</li></ul>" 
+                    },
+                    { 
+                        id: 2, 
+                        title: "Bếp Hoàng Cầm Giấu Khói", 
+                        code: "cc-02", 
+                        location: "Khu sinh hoạt ngầm", 
+                        summary: "Sáng sáng chế độc đáo tan khói tỏa mặt đất tránh sự phát hiện của máy bay trinh sát.", 
+                        content: "<p class='mb-3'>Do đồng chí Hoàng Cầm sáng chế. Bếp được đào chìm dưới đất, từ bếp nấu có hệ thống đường rãnh dẫn khói kéo dài hàng chục mét. Khói bếp được lọc qua các lớp lá cây ẩm và đất tơi xốp, khi thoát lên mặt đất chỉ còn là những làn sương mỏng tan nhanh vào buổi sớm.</p>" 
+                    },
+                    { 
+                        id: 3, 
+                        title: "Công Xưởng Vũ Khí Ngầm", 
+                        code: "cc-03", 
+                        location: "Tầng ngầm khu Bến Dược", 
+                        summary: "Nơi tái chế bom đạn lép của đối phương thành mìn, bẫy chông và vũ khí tự tạo.", 
+                        content: "<p class='mb-3'>Quân dân Củ Chi đã thu gom bom đạn chưa nổ của đối phương đem về các xưởng quân giới dưới lòng đất. Bằng sự sáng tạo phi thường, họ cưa bom, lấy thuốc nổ để chế tạo ra các loại mìn định hướng, bẫy chông, mìn gạt hiệu quả cao.</p>" 
+                    },
+                    { 
+                        id: 4, 
+                        title: "Bệnh Viện & Phòng Phẫu Thuật", 
+                        code: "cc-04", 
+                        location: "Tầng 2 địa đạo", 
+                        summary: "Nơi cứu chữa thương binh trong điều kiện thiếu thốn ánh sáng và dụng cụ y tế.", 
+                        content: "<p class='mb-3'>Trong lòng đất tối tăm, các bác sĩ và y tá chiến trường đã tiến hành hàng nghìn ca phẫu thuật cứu sống chiến sĩ. Ánh sáng phẫu thuật được lấy từ đèn măng-xông hoặc đèn dầu tự chế từ chai lọ thuỷ tinh.</p>" 
+                    },
+                    { 
+                        id: 5, 
+                        title: "Đền Tưởng Niệm Bến Dược", 
+                        code: "cc-05", 
+                        location: "Khu vực Bến Dược", 
+                        summary: "Nơi khắc tên hơn 44.000 anh hùng liệt sĩ đã hy sinh trên vùng đất Củ Chi.", 
+                        content: "<p class='mb-3'>Đền tưởng niệm Bến Dược có kiến trúc truyền thống uy nghiêm. Bên trong đền lưu danh hơn 44.000 liệt sĩ đã ngã xuống trong hai cuộc kháng chiến bảo vệ Tổ quốc, thể hiện đạo lý 'Uống nước nhớ nguồn' sâu sắc.</p>" 
+                    },
+                    { 
+                        id: 6, 
+                        title: "Thưởng Thức Món Khoai Mì Chấm Muối Vừng", 
+                        code: "cc-06", 
+                        location: "Khu bếp Hoàng Cầm", 
+                        summary: "Trải nghiệm ẩm thực dân dã gắn liền với đời sống chiến sĩ thời chiến.", 
+                        content: "<p class='mb-3'>Khi kết thúc chuyến trải nghiệm chui hầm địa đạo, du khách sẽ được thưởng thức món khoai mì (sắn) luộc nóng hổi chấm muối vừng đậu nành và uống trà lá cây rừng – món ăn lương thực chính nuôi sống quân dân Củ Chi qua những năm tháng gian khổ.</p>" 
+                    }
+                ],
+                quiz: Array.from({ length: 20 }, (_, i) => ({
+                    id: i + 1,
+                    question: [
+                        "Tổng chiều dài hệ thống Địa đạo Củ Chi trong lòng đất khoảng bao nhiêu km?",
+                        "Địa đạo Củ Chi gồm có mấy tầng sâu chính trong lòng đất?",
+                        "Loại bếp nổi tiếng được sử dụng trong địa đạo giúp giấu khói tên là gì?",
+                        "Địa đạo Củ Chi thuộc địa bàn huyện nào của TP.HCM?",
+                        "Tầng sâu nhất của Địa đạo Củ Chi có thể sâu tới khoảng bao nhiêu mét?",
+                        "Vật dụng thô sơ chính được quân dân Củ Chi dùng để đào địa đạo là gì?",
+                        "Loại đất ở Củ Chi có đặc điểm gì giúp hệ thống địa đạo bền vững?",
+                        "Địa đạo Củ Chi được mệnh danh là gì trong lịch sử chiến tranh?",
+                        "Khu di tích Địa đạo Củ Chi hiện nay gồm hai khu vực tham quan chính nào?",
+                        "Món ăn dân dã đặc trưng mà du khách được thưởng thức khi tham quan Địa đạo là gì?",
+                        "Nắp hầm địa đạo được ngụy trang bằng chất liệu gì?",
+                        "Hệ thống thông hơi của địa đạo được ngụy trang giống như hình dạng gì?",
+                        "Bếp Hoàng Cầm do ai sáng chế ra?",
+                        "Trong địa đạo có các khu chức năng nào?",
+                        "Địa đạo Củ Chi được bắt đầu đào từ thời kỳ kháng chiến nào?",
+                        "Chỗ ngoặt trong đường hầm địa đạo có tác dụng gì?",
+                        "Địa đạo Củ Chi đã được xếp hạng Di tích Quốc gia Đặc biệt vào năm nào?",
+                        "Khách du lịch có thể trải nghiệm chui hầm thực tế tại Địa đạo Củ Chi đúng hay sai?",
+                        "Vùng đất Củ Chi thời chiến tranh còn được mệnh danh là gì?",
+                        "Phương tiện di chuyển phổ biến từ trung tâm TP.HCM đến Củ Chi là gì?"
+                    ][i],
+                    options: [
+                        ["Hơn 200 km", "50 km", "10 km", "500 km"],
+                        ["3 tầng sâu", "1 tầng", "5 tầng", "10 tầng"],
+                        ["Bếp Hoàng Cầm", "Bếp ga", "Bếp than tổ ong", "Bếp từ"],
+                        ["Huyện Củ Chi", "Huyện Hóc Môn", "Huyện Bình Chánh", "Huyện Cần Giờ"],
+                        ["Khoảng 12 mét", "2 mét", "30 mét", "50 mét"],
+                        ["Lưỡi cuốc ngắn và thúng mủng bằng tre", "Máy xúc hiện đại", "Thuốc nổ công nghiệp", "Máy khoan đá"],
+                        ["Đất đất sét pha đá đất cứng chắc càng đi sâu càng bền", "Đất cát xốp dễ sạt lở", "Đất bùn lầy", "Đất đá vôi"],
+                        ["'Mê cung trong lòng đất' / Thành phố ngầm", "Pháo đài trên không", "Căn cước hàng hải", "Thành cổ đá"],
+                        ["Bến Dược và Bến Đình", "Bến Thành và Bến Nghé", "Củ Chi và Hóc Môn", "Tân Phú và Củ Chi"],
+                        ["Khoai mì (sắn) chấm muối đậu nành", "Bánh xèo", "Phở bò", "Cơm tấm"],
+                        ["Lá khô và đất tự nhiên trùng màu mặt đất", "Tấm xi măng lớn", "Nắp sắt đỏ", "Thảm nhựa màu xanh"],
+                        ["Gốc cây, gò mối tự nhiên", "Cột cờ cao", "Cột sắt", "Ống khói cao"],
+                        ["Hoàng Cầm (chiến sĩ nuôi quân)", "Nguyễn Văn Trỗi", "Võ Nguyên Giáp", "Trần Đại Nghĩa"],
+                        ["Phòng giải phẫu y tế, hội họp, bếp, kho vũ khí", "Chỉ có chỗ ngủ", "Rạp chiếu phim", "Bãi đỗ xe"],
+                        ["Thời kỳ kháng chiến chống Pháp (khoảng 1948)", "Thời kỳ chống Mỹ", "Thời phong kiến", "Sau năm 1975"],
+                        ["Cản sóng xung kích nổ bom và ngăn hơi độc", "Để làm đẹp", "Để chứa nước", "Để chăn nuôi"],
+                        ["Năm 2015", "Năm 1990", "Năm 2000", "Năm 1975"],
+                        ["Đúng", "Sai", "Chỉ dành cho quân sự", "Đã lấp hoàn toàn"],
+                        ["'Đất thép thành đồng'", "Đất ngọc", "Thành phố xanh", "Đô thị biển"],
+                        ["Xe xe buýt, ô tô du lịch hoặc cano đường sông", "Tàu hỏa", "Máy bay", "Tàu ngầm"]
+                    ][i],
+                    answer: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0][i],
+                    explain: `Đáp án chi tiết câu hỏi ${i + 1} về Địa đạo Củ Chi.`
+                }))
+            },
+            {
+                id: "bao-tang-chung-tich",
+                name: "Bảo Tàng Chứng Tích Chiến Tranh",
+                subTitle: "Nơi Lưu Giữ Ký Ức Lịch Sử & Thông Điệp Hòa Bình",
+                address: "28 Võ Văn Tần, Phường Võ Thị Sáu, Quận 3, TP.HCM",
+                hours: "07:30 - 17:30 hàng ngày",
+                // CHÈN ẢNH BẢO TÀNG CHỨNG TÍCH CHIẾN TRANH TẠI ĐÂY.
+                image: "./bảo tàng.png",
+                mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.4678888497645!2d106.69199497573615!3d10.778732159211025!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752f385570472f%3A0x1787491bf0edeac6!2sWar%20Remnants%20Museum!5e0!3m2!1sen!2svn!4v1700000000000!5m2!1sen!2svn",
+                description: "Top các bảo tàng thu hút du khách quốc tế đông nhất Việt Nam, nơi trưng bày hơn 20.000 tài liệu, hiện vật và hình ảnh chân thực về lịch sử chiến tranh.",
+                subTopics: [
+                    { 
+                        id: 1, 
+                        title: "Trưng Bày Khí Tài Quân Sự Ngoài Trời", 
+                        code: "btct-01", 
+                        location: "Sân trước bảo tàng", 
+                        summary: "Bộ sưu tập máy bay chiến đấu, xe tăng M48, trực thăng Chinook và các loại bom đạn.", 
+                        content: "<p class='mb-3'>Ngay khi bước qua cổng bảo tàng, du khách được tận mắt chứng kiến hàng chục khí tài chiến tranh quy mô lớn:</p><ul class='list-disc pl-5 space-y-1 text-stone-300'><li>Máy bay vận tải hạng nặng CH-47 Chinook.</li><li>Máy bay cường kích A-37, F-5E, trực thăng UH-1.</li><li>Xe tăng M48 Patton, xe bọc thép M113.</li><li>Các vỏ bom hất đạn pháo cỡ lớn thu gom từ chiến trường.</li></ul>" 
+                    },
+                    { 
+                        id: 2, 
+                        title: "Mô Phỏng 'Chuồng Cọp' Côn Đảo", 
+                        code: "btct-02", 
+                        location: "Góc sân bên trái", 
+                        summary: "Tái hiện sự kiên cường của các chiến sĩ cách mạng bị giam giữ tại nhà tù thời chiến.", 
+                        content: "<p class='mb-3'>Khu vực tái hiện mô hình chuồng cọp Côn Đảo với hệ thống dây thép gai, phòng giam chật hẹp. Qua đó tố cáo sự tàn bạo của chế độ lao tù xưa, đồng thời tôn vinh ý chí kiên cường bất khuất của các nhà yêu nước và chiến sĩ cách mạng.</p>" 
+                    },
+                    { 
+                        id: 3, 
+                        title: "Triển Lãm 'Hồi Ký Hồi Sinh' & Báo Chí", 
+                        code: "btct-03", 
+                        location: "Tầng 2", 
+                        summary: "Những bộ ảnh phóng sự chiến trường giá trị của các phóng viên ảnh quốc tế.", 
+                        content: "<p class='mb-3'>Phòng trưng bày lưu giữ hàng trăm bức ảnh phóng sự điều tra nổi tiếng của các phóng viên chiến trường quốc tế như Tim Page, Larry Burrows, Robert Capa... Những góc quay chân thực đã thức tỉnh dư luận thế giới về khát vọng hòa bình của dân tộc Việt Nam.</p>" 
+                    },
+                    { 
+                        id: 4, 
+                        title: "Hậu Quả Chất Độc Hóa Học Dioxin", 
+                        code: "btct-04", 
+                        location: "Tầng 1", 
+                        summary: "Trưng bày tư liệu hình ảnh về nỗi đau chất độc da cam và nỗ lực khắc phục.", 
+                        content: "<p class='mb-3'>Chuyên đề trưng bày phản ánh sự tàn phá nặng nề của chất độc da cam/Dioxin đối với môi trường thiên nhiên và sức khỏe nhiều thế hệ người dân Việt Nam. Đồng thời lan tỏa thông điệp kêu gọi hòa bình và sẻ chia từ cộng đồng quốc tế.</p>" 
+                    },
+                    { 
+                        id: 5, 
+                        title: "Gian Trưng Bày Thiếu Nhi Vì Hòa Bình", 
+                        code: "btct-05", 
+                        location: "Tầng 3", 
+                        summary: "Bộ sưu tập tranh vẽ ước mơ hòa bình thế giới của trẻ em Việt Nam và quốc tế.", 
+                        content: "<p class='mb-3'>Khác với không gian trầm mặc của các tầng dưới, phòng tranh thiếu nhi ngập tràn màu sắc rực rỡ với hàng trăm bức tranh vẽ về bồ câu trắng, trái đất xanh và nụ cười trẻ thơ – gửi gắm thông điệp hướng tới một tương lai không còn chiến tranh.</p>" 
+                    },
+                    { 
+                        id: 6, 
+                        title: "Thuyết Minh Tự Động Audio Guide Đa Ngôn Ngữ", 
+                        code: "btct-06", 
+                        location: "Quầy đón tiếp", 
+                        summary: "Hệ thống tai nghe thông minh hỗ trợ hơn 10 ngôn ngữ phổ biến.", 
+                        content: "<p class='mb-3'>Để giúp du khách quốc tế hiểu sâu sắc bối cảnh lịch sử của từng hiện vật, bảo tàng trang bị hệ thống Audio Guide hiện đại tích hợp mã QR. Du khách có thể lắng nghe câu chuyện lịch sử bằng tiếng Anh, Pháp, Tây Ban Nha, Nhật Bản, Hàn Quốc, Trung Quốc...</p>" 
+                    }
+                ],
+                quiz: Array.from({ length: 20 }, (_, i) => ({
+                    id: i + 1,
+                    question: [
+                        "Bảo tàng Chứng tích Chiến tranh nằm tại quận nào của TP.HCM?",
+                        "Bảo tàng được thành lập vào năm nào ngay sau ngày đất nước thống nhất?",
+                        "Bảo tàng trưng bày chuyên đề về chủ đề chính nào?",
+                        "Sân ngoài trời của Bảo tàng trưng bày các hiện vật kích thước lớn nào?",
+                        "Bảo tàng Chứng tích Chiến tranh nằm trên con đường nào?",
+                        "Bảo tàng từng vinh dự lọt vào danh sách top các bảo tàng hàng đầu Châu Á đúng hay sai?",
+                        "Một trong những triển lãm ảnh nổi tiếng tại Bảo tàng tái hiện góc nhìn của ai?",
+                        "Thông điệp lớn nhất mà Bảo tàng muốn gửi tới du khách quốc tế là gì?",
+                        "Bộ sưu tập hiện vật tại Bảo tàng ước tính lên tới hơn bao nhiêu tài liệu hiện vật?",
+                        "Khu vực mô phỏng 'Chuồng cọp' tại bảo tàng tái hiện di tích nhà tù nào?",
+                        "Đối tượng du khách tham quan Bảo tàng Chứng tích Chiến tranh chiếm tỷ lệ lớn là ai?",
+                        "Bảo tàng có khu vực triển lãm về hậu quả của chất độc hóa học Dioxin đúng hay sai?",
+                        "Bảo tàng mở cửa phục vụ du khách vào các ngày nào trong tuần?",
+                        "Tên gọi ban đầu của Bảo tàng khi mới thành lập năm 1975 là gì?",
+                        "Trong bảo tàng có phòng trưng bày hòa bình dành riêng cho trẻ em đúng hay sai?",
+                        "Chiếc máy bay trực thăng vận tải khổng lồ trưng bày ngoài sân là loại máy bay nào?",
+                        "Bảo tàng có cung cấp hệ thống thuyết minh tự động nhiều ngôn ngữ không?",
+                        "Khoảng cách từ Bảo tàng đến Dinh Độc Lập khoảng bao xa?",
+                        "Hoạt động giao lưu với các nhân chứng lịch sử thường xuyên diễn ra tại đây đúng hay sai?",
+                        "Ý nghĩa của việc tham quan Bảo tàng Chứng tích Chiến tranh là gì?"
+                    ][i],
+                    options: [
+                        ["Quận 3", "Quận 1", "Quận 5", "Quận 10"],
+                        ["Năm 1975 (tháng 9)", "Năm 1990", "Năm 2000", "Năm 1980"],
+                        ["Ký ức chiến tranh & hậu quả chiến tranh tại Việt Nam", "Lịch sử tự nhiên", "Cổ vật cổ đại", "Nghệ thuật hiện đại"],
+                        ["Máy bay chiến đấu, xe tăng, pháo đài bay", "Tàu thủy lớn", "Xe điện ngầm", "Tên lửa vũ trụ"],
+                        ["28 Võ Văn Tần", "Nam Kỳ Khởi Nghĩa", "Lê Duẩn", "Nguyen Hue"],
+                        ["Đúng (thường xuyên vào top đánh giá Tripadvisor)", "Sai", "Chưa từng", "Chỉ xếp hạng trong nước"],
+                        ["Các phóng viên ảnh chiến trường quốc tế", "Các họa sĩ phong cảnh", "Du khách tự do", "Các nhà kinh tế"],
+                        ["Khát vọng Hòa bình, đoàn kết và hữu nghị giữa các dân tộc", "Thúc đẩy chiến tranh", "Quảng cáo thương mại", "Giải trí"],
+                        ["Hơn 20.000 hiện vật, tài liệu, phim ảnh", "100 hiện vật", "500 hiện vật", "1 triệu hiện vật"],
+                        ["Nhà tù Côn Đảo", "Nhà tù Hỏa Lò", "Nhà tù Phú Quốc", "Khám Chí Hòa"],
+                        ["Du khách quốc tế và học sinh sinh viên", "Chỉ có người địa phương", "Chỉ có các nhà nghiên cứu", "Chỉ có quân nhân"],
+                        ["Đúng", "Sai", "Không có thông tin", "Đã tháo dỡ"],
+                        ["Tất cả các ngày trong tuần (Thứ 2 đến Chủ nhật)", "Chỉ mở cuối tuần", "Chỉ mở Thứ 2", "Nghỉ Thứ 7"],
+                        ["Nhà trưng bày Tội ác Mỹ - Ngụy", "Bảo tàng TP.HCM", "Bảo tàng Mỹ thuật", "Bảo tàng Quân đội"],
+                        ["Đúng", "Sai", "Không có", "Đang xây dựng"],
+                        ["CH-47 Chinook", "Boeing 747", "Airbus A320", "Concorde"],
+                        ["Có hỗ trợ Audio Guide đa ngôn ngữ", "Không có", "Chỉ có tiếng Việt", "Chỉ có tiếng Pháp"],
+                        ["Khoảng 1 km (rất gần)", "20 km", "50 km", "100 km"],
+                        ["Đúng", "Sai", "Không bao giờ", "Chỉ tổ chức trực tuyến"],
+                        ["Hiểu thấu giá trị của Hòa Bình và lịch sử dân tộc", "Đi chơi mua sắm", "Chụp ảnh giải trí", "Tìm hiểu ẩm thực"]
+                    ][i],
+                    answer: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0][i],
+                    explain: `Giải thích chi tiết câu hỏi ${i + 1} về Bảo tàng Chứng tích Chiến tranh.`
+                }))
+            }
+        ];
 
-    <div class="col-md-4 mb-4">
-      <article class="card latest-news-card h-100">
-        <img class="card-img-top latest-news-image" src="https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=1200&q=80" alt="Khu du lịch Suối Tiên">
-        <div class="card-body">
-          <div class="article-meta"><span>Giải trí</span><time datetime="2026-09-13">13/09/2026</time></div>
-          <h5 class="card-title">Khu du lịch Suối Tiên</h5>
-          <p class="card-text">Địa chỉ: Q.9. Một trong những địa điểm vui chơi, nghỉ dưỡng và du lịch sinh thái phổ biến với không gian xanh và hoạt động giải trí đa dạng.</p>
-          <a href="blank.html" target="_blank" rel="noopener" class="btn btn-danger btn-lg fw-bold">Xem chi tiết</a>
-        </div>
-      </article>
-    </div>
+        let currentLandmark = landmarksData[0]; // Default selected landmark
+        let activeTabIndex = 'cards';
+        let currentSubTopicIndex = 0;
+        let slideIndex = 0;
 
-    <div class="col-md-4 mb-4">
-      <article class="card latest-news-card h-100">
-        <img class="card-img-top latest-news-image" src="https://images.unsplash.com/photo-1505761671935-60e5b5d5f6a8?auto=format&fit=crop&w=1200&q=80" alt="Bến Nhà Rồng">
-        <div class="card-body">
-          <div class="article-meta"><span>Di tích</span><time datetime="2026-09-13">13/09/2026</time></div>
-          <h5 class="card-title">Bến Nhà Rồng</h5>
-          <p class="card-text">Địa chỉ: Q.4. Nơi gắn liền với lịch sử xưa của thành phố, mang cảm giác hoài niệm và là điểm đến yêu thích của người yêu du lịch.</p>
-          <a href="blank.html" target="_blank" rel="noopener" class="btn btn-danger btn-lg fw-bold">Xem chi tiết</a>
-        </div>
-      </article>
-    </div>
+        // Quiz State Engine
+        let activeQuizAnswers = {}; // { questionId: selectedOptionIndex }
+        let currentQuizQuestionIndex = 0;
 
-    <div class="col-md-4 mb-4">
-      <article class="card latest-news-card h-100">
-        <img class="card-img-top latest-news-image" src="https://images.unsplash.com/photo-1521295121783-8a321d551ad2?auto=format&fit=crop&w=1200&q=80" alt="Vườn hoa Hàng Bàng">
-        <div class="card-body">
-          <div class="article-meta"><span>Điểm chụp ảnh</span><time datetime="2026-09-13">13/09/2026</time></div>
-          <h5 class="card-title">Vườn hoa Hàng Bàng</h5>
-          <p class="card-text">Địa chỉ: Q.5. Không gian xanh, thơ mộng và phù hợp cho những buổi đi dạo, chụp ảnh và thư giãn giữa nhịp sống thành phố.</p>
-          <a href="blank.html" target="_blank" rel="noopener" class="btn btn-danger btn-lg fw-bold">Xem chi tiết</a>
-        </div>
-      </article>
-    </div>
-  </div>
-</section>
-<footer id="site-footer" class="site-footer">
-  <p>© THCS NTP 2026-2027, PROJECT 1144</p>
-</footer>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-  const passwordInput = document.getElementById('exampleInputPassword1');
-  const passwordToggle = document.getElementById('exampleCheck1');
-  const registerForm = document.getElementById('register-form');
+        function showLandmarksHub() {
+            document.getElementById('landmarksHubView').classList.remove('hidden');
+            document.getElementById('landmarkDetailView').classList.add('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
 
-  passwordToggle.addEventListener('change', () => {
-    passwordInput.type = passwordToggle.checked ? 'text' : 'password';
-  });
+        function openLandmarkWorkspace(landmarkId) {
+            const found = landmarksData.find(l => l.id === landmarkId);
+            if (!found) return;
 
-  registerForm.addEventListener('submit', (event) => {
-    event.preventDefault();
-    const registerModal = bootstrap.Modal.getInstance(document.getElementById('form-register'));
-    registerModal.hide();
-    window.alert('Đăng ký thành công! Chào mừng bạn đến với NTP News.');
-    registerForm.reset();
-  });
-</script>
+            currentLandmark = found;
+            activeQuizAnswers = {}; // Reset answers for new landmark
+            currentQuizQuestionIndex = 0;
+
+            // Render Header Section
+            const header = document.getElementById('activeLandmarkHeader');
+            header.innerHTML = `
+                <div class="absolute inset-0 bg-cover bg-center opacity-30 mix-blend-luminosity scale-105" style="background-image: url('${currentLandmark.image}');"></div>
+                <div class="absolute inset-0 bg-gradient-to-r from-stone-950 via-stone-900/90 to-transparent"></div>
+
+                <div class="relative z-10 max-w-3xl">
+                    <span class="inline-block px-3 py-1 bg-amber-500/20 border border-amber-500/40 text-amber-300 text-xs font-semibold uppercase tracking-wider rounded-full mb-3">
+                        <i class="fa-solid fa-landmark mr-1"></i> Danh Lam Thắng Cảnh
+                    </span>
+                    <h2 class="font-serif font-extrabold text-3xl sm:text-5xl text-amber-100 mb-2">
+                        ${currentLandmark.name}
+                    </h2>
+                    <p class="text-xs sm:text-sm text-amber-300/90 font-medium mb-4">
+                        ${currentLandmark.subTitle}
+                    </p>
+                    <p class="text-stone-300 text-xs sm:text-base leading-relaxed mb-6 font-light">
+                        ${currentLandmark.description}
+                    </p>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs text-stone-300">
+                        <div class="flex items-center gap-2"><i class="fa-solid fa-location-dot text-amber-400"></i> ${currentLandmark.address}</div>
+                        <div class="flex items-center gap-2"><i class="fa-solid fa-clock text-amber-400"></i> ${currentLandmark.hours}</div>
+                    </div>
+                </div>
+            `;
+
+            // Render Sub-topics Cards
+            renderSubTopicsGrid();
+
+            // Render 20 Questions Quiz
+            render20QuestionsQuiz();
+
+            // Render Visitor Info Tab
+            renderVisitorInfo();
+
+            // Switch view
+            document.getElementById('landmarksHubView').classList.add('hidden');
+            document.getElementById('landmarkDetailView').classList.remove('hidden');
+
+            switchLandmarkTab('cards');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function renderLandmarksHubGrid() {
+            const grid = document.getElementById('landmarksGrid');
+            const searchVal = document.getElementById('globalSearchInput').value.toLowerCase().trim();
+
+            const filtered = landmarksData.filter(l => {
+                return l.name.toLowerCase().includes(searchVal) ||
+                       l.subTitle.toLowerCase().includes(searchVal) ||
+                       l.description.toLowerCase().includes(searchVal);
+            });
+
+            document.getElementById('hubCountBadge').innerText = `${filtered.length} Địa danh tiêu biểu`;
+
+            if (filtered.length === 0) {
+                grid.innerHTML = `
+                    <div class="col-span-full text-center py-12 bg-stone-100 dark:bg-stone-800/50 rounded-2xl border border-dashed border-stone-300 dark:border-stone-700">
+                        <i class="fa-solid fa-magnifying-glass text-3xl text-stone-400 mb-2"></i>
+                        <p class="text-stone-500 dark:text-stone-400 font-medium text-sm">Không tìm thấy địa danh nào phù hợp với từ khóa.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            grid.innerHTML = filtered.map(item => `
+                <div onclick="openLandmarkWorkspace('${item.id}')" class="group cursor-pointer bg-white dark:bg-stone-900 rounded-3xl overflow-hidden border border-stone-200 dark:border-stone-800 hover:border-heritage-500 dark:hover:border-heritage-500 hover:shadow-2xl hover:shadow-heritage-500/10 transition-all duration-300 flex flex-col">
+                    <div class="h-48 relative overflow-hidden bg-stone-800">
+                        <img src="${item.image}" alt="${item.name}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 opacity-90">
+                        <div class="absolute inset-0 bg-gradient-to-t from-stone-950 via-transparent to-transparent"></div>
+                        <span class="absolute top-4 left-4 px-3 py-1 bg-stone-950/80 backdrop-blur-md text-amber-300 border border-stone-700 text-[10px] font-bold rounded-full uppercase tracking-wider">
+                            ${item.subTopics.length} Mục Thuyết Trình
+                        </span>
+                        <span class="absolute bottom-3 right-4 text-xs font-bold text-amber-300 bg-heritage-900/80 px-2.5 py-0.5 rounded-md border border-amber-500/30">
+                            20 Câu Trắc Nghiệm
+                        </span>
+                    </div>
+
+                    <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
+                        <div>
+                            <h4 class="font-serif text-xl font-bold text-stone-900 dark:text-white group-hover:text-heritage-600 dark:group-hover:text-amber-400 transition-colors mb-2">
+                                ${item.name}
+                            </h4>
+                            <p class="text-xs text-stone-600 dark:text-stone-300 line-clamp-2 leading-relaxed font-semibold">
+                                ${item.description}
+                            </p>
+                        </div>
+
+                        <div class="pt-4 border-t border-stone-100 dark:border-stone-800/80 flex items-center justify-between text-xs font-bold text-heritage-600 dark:text-amber-400">
+                            <span>Mở trang di tích & trắc nghiệm</span>
+                            <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderSubTopicsGrid() {
+            const grid = document.getElementById('landmarkSubTopicsGrid');
+            const subTopics = currentLandmark.subTopics;
+
+            document.getElementById('subTopicsTitle').innerText = `Các Mục & Điểm Khám Phá (${currentLandmark.name})`;
+            document.getElementById('subTopicsCount').innerText = `Hiển thị ${subTopics.length} mục`;
+
+            grid.innerHTML = subTopics.map((st, idx) => `
+                <div onclick="openSubTopicModal(${idx})" class="group cursor-pointer bg-white dark:bg-stone-900 rounded-2xl p-5 border border-stone-200 dark:border-stone-800 hover:border-heritage-500 dark:hover:border-heritage-500 hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="px-2.5 py-1 bg-heritage-100 dark:bg-stone-800 text-heritage-800 dark:text-amber-300 text-[11px] font-bold rounded-md uppercase">
+                                ${st.code}
+                            </span>
+                            <span class="text-[11px] text-stone-600 dark:text-stone-300 font-semibold">
+                                <i class="fa-solid fa-map-pin text-heritage-500 mr-1"></i>${st.location}
+                            </span>
+                        </div>
+                        <h5 class="font-serif text-base font-bold text-stone-900 dark:text-white group-hover:text-heritage-600 dark:group-hover:text-amber-400 transition-colors mb-2">
+                            ${st.title}
+                        </h5>
+                        <p class="text-xs text-stone-700 dark:text-stone-300 line-clamp-3 leading-relaxed font-semibold">
+                            ${st.summary}
+                        </p>
+                    </div>
+                    <div class="pt-3 mt-4 border-t border-stone-100 dark:border-stone-800 flex items-center justify-between text-xs font-bold text-heritage-600 dark:text-amber-400">
+                        <span>Đọc tư liệu chi tiết</span>
+                        <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function switchLandmarkTab(tab) {
+            activeTabIndex = tab;
+            const btnCards = document.getElementById('tabCardsBtn');
+            const btnQuiz = document.getElementById('tabQuizBtn');
+            const btnInfo = document.getElementById('tabInfoBtn');
+
+            const contentCards = document.getElementById('tabContentCards');
+            const contentQuiz = document.getElementById('tabContentQuiz');
+            const contentInfo = document.getElementById('tabContentInfo');
+
+            [btnCards, btnQuiz, btnInfo].forEach(b => {
+                b.className = "px-4 py-2 rounded-xl text-xs sm:text-sm font-medium bg-stone-200 dark:bg-stone-800 text-stone-700 dark:text-stone-300 hover:bg-stone-300 dark:hover:bg-stone-700 transition-all whitespace-nowrap";
+            });
+
+            [contentCards, contentQuiz, contentInfo].forEach(c => c.classList.add('hidden'));
+
+            if (tab === 'cards') {
+                btnCards.className = "px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-heritage-600 text-white shadow-md transition-all whitespace-nowrap";
+                contentCards.classList.remove('hidden');
+            } else if (tab === 'quiz') {
+                btnQuiz.className = "px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-heritage-600 text-white shadow-md transition-all whitespace-nowrap";
+                contentQuiz.classList.remove('hidden');
+            } else if (tab === 'info') {
+                btnInfo.className = "px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-heritage-600 text-white shadow-md transition-all whitespace-nowrap";
+                contentInfo.classList.remove('hidden');
+            }
+        }
+
+        function scrollToLandmarkSection(id) {
+            switchLandmarkTab('quiz');
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function openSubTopicModal(index) {
+            currentSubTopicIndex = index;
+            const st = currentLandmark.subTopics[index];
+
+            document.getElementById('modalTitle').innerText = st.title;
+            document.getElementById('modalBadge').innerText = st.code.toUpperCase();
+            document.getElementById('modalLocation').innerText = st.location;
+            document.getElementById('modalBody').innerHTML = st.content + `<p class="mt-4 text-xs text-stone-400 leading-relaxed">${st.summary}</p>`;
+            const modalImage = document.getElementById('modalImage');
+            const hasModalImage = st.code === 'dl-01' || st.code === 'dl-02' || st.code === 'dl-03' || st.code === 'dl-04';
+            modalImage.src = st.image || './img1.png';
+            modalImage.alt = `Hình ảnh ${st.title}`;
+            modalImage.classList.toggle('hidden', !hasModalImage);
+            document.getElementById('modalBody').classList.toggle('font-bold', st.id === 1);
+            document.getElementById('modalBody').classList.toggle('font-semibold', st.id !== 1);
+
+            document.getElementById('modalPrevBtn').onclick = () => {
+                const prev = (currentSubTopicIndex - 1 + currentLandmark.subTopics.length) % currentLandmark.subTopics.length;
+                openSubTopicModal(prev);
+            };
+            document.getElementById('modalNextBtn').onclick = () => {
+                const next = (currentSubTopicIndex + 1) % currentLandmark.subTopics.length;
+                openSubTopicModal(next);
+            };
+
+            document.getElementById('subTopicModal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeSubTopicModal() {
+            document.getElementById('subTopicModal').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        function startPresentation() {
+            slideIndex = 0;
+            updateSlideView();
+            document.getElementById('presentationOverlay').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function stopPresentation() {
+            document.getElementById('presentationOverlay').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        function updateSlideView() {
+            const subTopics = currentLandmark.subTopics;
+            const st = subTopics[slideIndex];
+
+            document.getElementById('slideLandmarkName').innerText = `${currentLandmark.name.toUpperCase()} • SLIDESHOW`;
+            document.getElementById('slideBadge').innerText = `${st.code.toUpperCase()} • ${st.location}`;
+            document.getElementById('slideTitle').innerText = st.title;
+            document.getElementById('slideBody').innerHTML = st.content + `<div class="mt-6 p-4 rounded-xl bg-stone-900 border border-stone-800 text-stone-200 text-sm sm:text-base font-semibold">${st.summary}</div>`;
+            document.getElementById('slideIndicator').innerText = `Slide ${slideIndex + 1} / ${subTopics.length}`;
+        }
+
+        function nextSlide() {
+            slideIndex = (slideIndex + 1) % currentLandmark.subTopics.length;
+            updateSlideView();
+        }
+
+        function prevSlide() {
+            slideIndex = (slideIndex - 1 + currentLandmark.subTopics.length) % currentLandmark.subTopics.length;
+            updateSlideView();
+        }
+
+        function render20QuestionsQuiz() {
+            document.getElementById('quizLandmarkTitle').innerText = `Trắc Nghiệm: ${currentLandmark.name} (20 Câu Hỏi)`;
+            renderQuizQuestionMap();
+            renderCurrentQuizQuestion();
+            calculateQuizScore();
+        }
+
+        function renderQuizQuestionMap() {
+            const mapContainer = document.getElementById('quizQuestionMap');
+            const quizList = currentLandmark.quiz;
+
+            mapContainer.innerHTML = quizList.map((q, idx) => {
+                const isAnswered = activeQuizAnswers.hasOwnProperty(q.id);
+                const isCurrent = idx === currentQuizQuestionIndex;
+
+                let stateClass = "bg-stone-900 text-stone-400 border-stone-800 hover:bg-stone-800";
+                if (isAnswered) {
+                    const isCorrect = activeQuizAnswers[q.id] === q.answer;
+                    stateClass = isCorrect ? "bg-emerald-900/80 text-emerald-300 border-emerald-500" : "bg-rose-900/80 text-rose-300 border-rose-500";
+                }
+                if (isCurrent) {
+                    stateClass += " ring-2 ring-amber-400 font-bold";
+                }
+
+                return `
+                    <button onclick="jumpToQuizQuestion(${idx})" class="w-8 h-8 rounded-lg border text-xs font-medium transition-all ${stateClass}">
+                        ${idx + 1}
+                    </button>
+                `;
+            }).join('');
+        }
+
+        function renderCurrentQuizQuestion() {
+            const quizList = currentLandmark.quiz;
+            const q = quizList[currentQuizQuestionIndex];
+
+            document.getElementById('quizCurrentProgress').innerText = `Câu hỏi ${currentQuizQuestionIndex + 1} / 20`;
+            document.getElementById('quizQuestionText').innerText = `${currentQuizQuestionIndex + 1}. ${q.question}`;
+
+            const optionsContainer = document.getElementById('quizOptionsContainer');
+            const hasAnswered = activeQuizAnswers.hasOwnProperty(q.id);
+            const selectedOpt = activeQuizAnswers[q.id];
+
+            optionsContainer.innerHTML = q.options.map((opt, idx) => {
+                let btnStyle = "bg-stone-900 hover:bg-stone-800 text-stone-200 border-stone-800";
+                let iconStyle = "fa-regular fa-circle text-stone-500";
+
+                if (hasAnswered) {
+                    if (idx === q.answer) {
+                        btnStyle = "bg-emerald-950 border-emerald-500 text-emerald-200 font-bold";
+                        iconStyle = "fa-solid fa-circle-check text-emerald-400";
+                    } else if (idx === selectedOpt) {
+                        btnStyle = "bg-rose-950 border-rose-500 text-rose-200 font-bold";
+                        iconStyle = "fa-solid fa-circle-xmark text-rose-400";
+                    }
+                }
+
+                return `
+                    <button ${hasAnswered ? 'disabled' : ''} onclick="selectQuizAnswer(${q.id}, ${idx})" class="w-full text-left p-4 rounded-xl border ${btnStyle} text-xs sm:text-sm font-semibold transition-all flex items-center justify-between group">
+                        <span>${String.fromCharCode(65 + idx)}. ${opt}</span>
+                        <i class="${iconStyle}"></i>
+                    </button>
+                `;
+            }).join('');
+
+            const feedbackBox = document.getElementById('quizFeedbackBox');
+            if (hasAnswered) {
+                const isCorrect = selectedOpt === q.answer;
+                feedbackBox.className = isCorrect 
+                    ? "mt-5 p-4 rounded-xl text-xs sm:text-sm font-medium bg-emerald-950/90 border border-emerald-500/60 text-emerald-200" 
+                    : "mt-5 p-4 rounded-xl text-xs sm:text-sm font-medium bg-rose-950/90 border border-rose-500/60 text-rose-200";
+                
+                feedbackBox.innerHTML = `
+                    <div class="flex items-start gap-2">
+                        <i class="${isCorrect ? 'fa-solid fa-circle-check text-emerald-400' : 'fa-solid fa-circle-xmark text-rose-400'} text-base mt-0.5"></i>
+                        <div>
+                            <strong>${isCorrect ? 'Chính xác!' : 'Chưa đúng!'}</strong> Đáp án đúng là <strong>${q.options[q.answer]}</strong>.
+                            <p class="mt-1 text-stone-300 font-normal">${q.explain}</p>
+                        </div>
+                    </div>
+                `;
+                feedbackBox.classList.remove('hidden');
+            } else {
+                feedbackBox.classList.add('hidden');
+            }
+
+            renderQuizQuestionMap();
+        }
+
+        function selectQuizAnswer(questionId, optionIndex) {
+            activeQuizAnswers[questionId] = optionIndex;
+            renderCurrentQuizQuestion();
+            calculateQuizScore();
+        }
+
+        function jumpToQuizQuestion(idx) {
+            currentQuizQuestionIndex = idx;
+            renderCurrentQuizQuestion();
+        }
+
+        function nextQuizQuestion() {
+            if (currentQuizQuestionIndex < 19) {
+                currentQuizQuestionIndex++;
+                renderCurrentQuizQuestion();
+            }
+        }
+
+        function prevQuizQuestion() {
+            if (currentQuizQuestionIndex > 0) {
+                currentQuizQuestionIndex--;
+                renderCurrentQuizQuestion();
+            }
+        }
+
+        function resetCurrentQuiz() {
+            activeQuizAnswers = {};
+            currentQuizQuestionIndex = 0;
+            render20QuestionsQuiz();
+        }
+
+        function calculateQuizScore() {
+            const quizList = currentLandmark.quiz;
+            let correctCount = 0;
+
+            quizList.forEach(q => {
+                if (activeQuizAnswers.hasOwnProperty(q.id) && activeQuizAnswers[q.id] === q.answer) {
+                    correctCount++;
+                }
+            });
+
+            // Total 20 questions = 5 points each = 100 points max
+            const score = correctCount * 5;
+            document.getElementById('quizScoreDisplay').innerText = `${score} / 100`;
+        }
+
+        function renderVisitorInfo() {
+            const container = document.getElementById('visitorInfoContainer');
+            container.innerHTML = `
+                <div>
+                    <span class="text-xs font-semibold text-heritage-600 dark:text-amber-400 uppercase tracking-widest">Thông tin thực tế</span>
+                    <h3 class="font-serif font-bold text-2xl sm:text-4xl text-stone-900 dark:text-white mt-1 mb-4">
+                        Tham Quan ${currentLandmark.name}
+                    </h3>
+                    <p class="text-stone-600 dark:text-stone-300 text-sm sm:text-base mb-6 leading-relaxed">
+                        ${currentLandmark.description}
+                    </p>
+
+                    <div class="space-y-4">
+                        <div class="flex items-start gap-3">
+                            <div class="w-10 h-10 rounded-xl bg-heritage-100 dark:bg-stone-800 text-heritage-700 dark:text-amber-400 flex items-center justify-center shrink-0">
+                                <i class="fa-solid fa-location-dot text-lg"></i>
+                            </div>
+                            <div>
+                                <h5 class="text-sm font-bold text-stone-900 dark:text-white">Địa chỉ di tích</h5>
+                                <p class="text-xs sm:text-sm text-stone-500 dark:text-stone-400">${currentLandmark.address}</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-3">
+                            <div class="w-10 h-10 rounded-xl bg-heritage-100 dark:bg-stone-800 text-heritage-700 dark:text-amber-400 flex items-center justify-center shrink-0">
+                                <i class="fa-solid fa-clock text-lg"></i>
+                            </div>
+                            <div>
+                                <h5 class="text-sm font-bold text-stone-900 dark:text-white">Giờ mở cửa phục vụ</h5>
+                                <p class="text-xs sm:text-sm text-stone-500 dark:text-stone-400">${currentLandmark.hours}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="rounded-2xl overflow-hidden border border-stone-200 dark:border-stone-800 shadow-md h-72 sm:h-96 bg-stone-200 dark:bg-stone-800">
+                    <iframe 
+                        title="Bản đồ ${currentLandmark.name}"
+                        src="${currentLandmark.mapUrl}" 
+                        class="w-full h-full border-0" 
+                        allowfullscreen="" 
+                        loading="lazy">
+                    </iframe>
+                </div>
+            `;
+        }
+
+        document.getElementById('globalSearchInput').addEventListener('input', () => {
+            if (!document.getElementById('landmarksHubView').classList.contains('hidden')) {
+                renderLandmarksHubGrid();
+            }
+        });
+
+        document.getElementById('themeToggle').addEventListener('click', () => {
+            document.documentElement.classList.toggle('dark');
+        });
+
+        document.addEventListener('keydown', (e) => {
+            const overlay = document.getElementById('presentationOverlay');
+            if (!overlay.classList.contains('hidden')) {
+                if (e.key === 'ArrowRight' || e.key === 'Space') {
+                    nextSlide();
+                } else if (e.key === 'ArrowLeft') {
+                    prevSlide();
+                } else if (e.key === 'Escape') {
+                    stopPresentation();
+                }
+            }
+        });
+
+        // Application Initialization
+        window.onload = function() {
+            renderLandmarksHubGrid();
+        };
+    </script>
 </body>
 </html>
