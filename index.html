@@ -1109,6 +1109,7 @@
 
         // Quiz State Engine
         let activeQuizAnswers = {}; // { questionId: selectedOptionIndex }
+        let quizWrongAttempts = {};
         let currentQuizQuestionIndex = 0;
 
         function showLandmarksHub() {
@@ -1123,6 +1124,7 @@
 
             currentLandmark = found;
             activeQuizAnswers = {}; // Reset answers for new landmark
+            quizWrongAttempts = {};
             currentQuizQuestionIndex = 0;
 
             // Render Header Section
@@ -1423,18 +1425,24 @@
 
             const feedbackBox = document.getElementById('quizFeedbackBox');
             if (hasAnswered) {
-                const isCorrect = selectedOpt === q.answer;
-                feedbackBox.className = isCorrect 
-                    ? "mt-5 p-4 rounded-xl text-xs sm:text-sm font-medium bg-emerald-950/90 border border-emerald-500/60 text-emerald-200" 
-                    : "mt-5 p-4 rounded-xl text-xs sm:text-sm font-medium bg-rose-950/90 border border-rose-500/60 text-rose-200";
+                feedbackBox.className = "mt-5 p-4 rounded-xl text-xs sm:text-sm font-medium bg-emerald-950/90 border border-emerald-500/60 text-emerald-200";
                 
                 feedbackBox.innerHTML = `
                     <div class="flex items-start gap-2">
-                        <i class="${isCorrect ? 'fa-solid fa-circle-check text-emerald-400' : 'fa-solid fa-circle-xmark text-rose-400'} text-base mt-0.5"></i>
+                        <i class="fa-solid fa-circle-check text-emerald-400 text-base mt-0.5"></i>
                         <div>
-                            <strong>${isCorrect ? 'Chính xác!' : 'Chưa đúng!'}</strong> Đáp án đúng là <strong>${q.options[q.answer]}</strong>.
+                            <strong>Chính xác!</strong> Đáp án đúng là <strong>${q.options[q.answer]}</strong>.
                             <p class="mt-1 text-stone-300 font-normal">${q.explain}</p>
                         </div>
+                    </div>
+                `;
+                feedbackBox.classList.remove('hidden');
+            } else if (quizWrongAttempts[q.id]) {
+                feedbackBox.className = "mt-5 p-4 rounded-xl text-xs sm:text-sm font-medium bg-rose-950/90 border border-rose-500/60 text-rose-200";
+                feedbackBox.innerHTML = `
+                    <div class="flex items-start gap-2">
+                        <i class="fa-solid fa-circle-xmark text-rose-400 text-base mt-0.5"></i>
+                        <div><strong>Chưa đúng!</strong> Hãy chọn lại đáp án cho đến khi chính xác để tiếp tục.</div>
                     </div>
                 `;
                 feedbackBox.classList.remove('hidden');
@@ -1446,18 +1454,29 @@
         }
 
         function selectQuizAnswer(questionId, optionIndex) {
-            activeQuizAnswers[questionId] = optionIndex;
+            const question = currentLandmark.quiz.find(q => q.id === questionId);
+            if (optionIndex === question.answer) {
+                activeQuizAnswers[questionId] = optionIndex;
+                delete quizWrongAttempts[questionId];
+            } else {
+                quizWrongAttempts[questionId] = true;
+            }
             renderCurrentQuizQuestion();
             calculateQuizScore();
         }
 
         function jumpToQuizQuestion(idx) {
+            if (idx > currentQuizQuestionIndex) {
+                return;
+            }
             currentQuizQuestionIndex = idx;
             renderCurrentQuizQuestion();
         }
 
         function nextQuizQuestion() {
-            if (currentQuizQuestionIndex < 19) {
+            const currentQuestion = currentLandmark.quiz[currentQuizQuestionIndex];
+            const isCorrectlyAnswered = activeQuizAnswers[currentQuestion.id] === currentQuestion.answer;
+            if (isCorrectlyAnswered && currentQuizQuestionIndex < 19) {
                 currentQuizQuestionIndex++;
                 renderCurrentQuizQuestion();
             }
@@ -1472,6 +1491,7 @@
 
         function resetCurrentQuiz() {
             activeQuizAnswers = {};
+            quizWrongAttempts = {};
             currentQuizQuestionIndex = 0;
             render20QuestionsQuiz();
         }
